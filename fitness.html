@@ -52,10 +52,17 @@
     }
     .product-card img {
       width: 100%;
-      height: 250px;
-      object-fit: cover;
+      max-height: 250px;
+      object-fit: contain;
       border-radius: 8px;
       margin-bottom: 15px;
+      background-color: #f3f4f6;
+      border: 2px solid #fed7aa;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+      border-color: #dc2626;
     }
     .badge {
       position: absolute;
@@ -103,6 +110,10 @@
       font-size: 18px;
       margin: 15px 0;
     }
+    .price::before {
+      content: "$";
+      color: #059669;
+    }
     .shop-btn {
       display: inline-block;
       margin-top: 15px;
@@ -113,12 +124,25 @@
       border-radius: 25px;
       font-weight: bold;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+      box-shadow: 0 2px 10px rgba(220,38,38,0.3);
+      position: relative;
+      overflow: hidden;
     }
     .shop-btn:hover {
       background: linear-gradient(135deg, #b91c1c, #dc2626);
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+      box-shadow: 0 4px 15px rgba(220,38,38,0.4);
+    }
+    .shop-btn::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    .shop-btn:hover::before {
+      left: 100%;
     }
     .no-products {
       text-align: center;
@@ -142,78 +166,60 @@
 
   <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
-
     function truncateText(text, maxLength = 120) {
-      if (text.length <= maxLength) return text;
-      return text.substr(0, maxLength) + '...';
+      return text.length <= maxLength ? text : text.substr(0, maxLength) + '...';
     }
-
     function getRandomBadge() {
-      const badges = ['💪 Strong', '🔥 Fat Burner', '⚡ Energy Boost', '🏆 Best Seller', '💯 Proven'];
-      return badges[Math.floor(Math.random() * badges.length)];
+      const badges = ['💪 Strong','🔥 Fat Burner','⚡ Energy Boost','🏆 Best Seller','💯 Proven'];
+      return badges[Math.floor(Math.random()*badges.length)];
+    }
+    function getRandomDownloads(){
+      const list=['1,200+','850+','2,100+','670+','1,500+'];
+      return list[Math.floor(Math.random()*list.length)];
     }
 
     fetch(SHEET_URL)
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById("product-container");
-        const noProducts = document.getElementById("no-products");
-
-        // Filter for both "Fitness" and "Fitness " (with space) to catch all variants
-        const fitnessProducts = data.filter(item => {
-          if (!item.Category) return false;
-          const category = item.Category.trim().toLowerCase();
-          return category === "fitness" || category === "health & fitness" || category === "fitness & health";
+      .then(r=>r.json())
+      .then(data=>{
+        const container=document.getElementById("product-container");
+        const noProducts=document.getElementById("no-products");
+        const fitnessProducts=data.filter(item=>{
+          if(!item.Category) return false;
+          const cat=item.Category.trim().toLowerCase();
+          return cat==="fitness"||cat==="fitness & health"||cat==="health & fitness";
         });
-
-        if (fitnessProducts.length === 0) {
-          noProducts.style.display = "block";
-        } else {
-          noProducts.style.display = "none";
-
-          fitnessProducts.forEach((product, index) => {
-            const productLink = product["Product Link "] || product["Product Link"];
-            if (!productLink || productLink.trim() === "") return;
-
-            const fullDescription = product.Description || "";
-            const shortDescription = truncateText(fullDescription, 100);
-            const badge = getRandomBadge();
-
-            const card = document.createElement("div");
-            card.className = "product-card";
-            card.innerHTML = `
-              <div class="badge">${badge}</div>
-              <img src="${product["Image URL"]}" alt="${product["Product Name"]}">
-              <h3>${product["Product Name"]}</h3>
-              <div class="description short" id="desc-${index}">
-                ${shortDescription}
-                ${fullDescription.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
-              </div>
-              <div class="price">${product.Price || ""}</div>
-              <a href="${productLink}" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now 💪</a>
-            `;
-
-            if (fullDescription.length > 100) {
-              const descElement = card.querySelector(`#desc-${index}`);
-              descElement.addEventListener('mouseenter', () => {
-                descElement.innerHTML = fullDescription + '<div class="expand-text">hover away to collapse</div>';
-                descElement.className = "description expanded";
-              });
-              descElement.addEventListener('mouseleave', () => {
-                descElement.innerHTML = shortDescription + '<div class="expand-text">• • • hover to read more</div>';
-                descElement.className = "description short";
-              });
-            }
-
-            container.appendChild(card);
-          });
+        if(!fitnessProducts.length){
+          noProducts.style.display="block";
+          return;
         }
+        fitnessProducts.forEach((p,i)=>{
+          const link=p["Product Link "]||p["Product Link"];
+          if(!link) return;
+          const full=p.Description||"";
+          const short=truncateText(full,100);
+          const badge=getRandomBadge();
+          const downloads=getRandomDownloads();
+          const card=document.createElement("div");card.className="product-card";
+         card.innerHTML=`
+  <div class="badge">${badge}</div>
+  <img src="${p["Image URL"]||''}" alt="${p["Product Name"]}"/>
+  <h3>${p["Product Name"]}</h3>
+  <div class="description short" id="d${i}">
+    ${short}${full.length>100?'<div class="expand-text">… read more</div>':''}
+  </div>
+  <div class="price">${p.Price||''}</div>
+  <a href="${link}" target="_blank" class="shop-btn">Shop Now 💪</a>
+`;
+          if(full.length>100){
+            const d=card.querySelector(`#d${i}`);
+            d.addEventListener("mouseenter",()=>{d.innerHTML=full+'<div class="expand-text">hover away</div>';d.className="description expanded";});
+            d.addEventListener("mouseleave",()=>{d.innerHTML=short+'<div class="expand-text">… read more</div>';d.className="description short";});
+          }
+          container.appendChild(card);
+        });
       })
-      .catch(error => {
-        console.error("Error loading products:", error);
-        const noProducts = document.getElementById("no-products");
-        noProducts.style.display = "block";
-        noProducts.textContent = "Error loading products. Please try again later.";
+      .catch(e=>{
+        document.getElementById("no-products").style.display="block";
       });
   </script>
 </body>
