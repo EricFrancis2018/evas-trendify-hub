@@ -2,189 +2,302 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Eva’s Trendify Hub</title>
+  <meta name="description" content="Explore categories and discover trending, trusted digital products across every niche!"/>
   <style>
     body {
-      margin: 0; font-family: Arial, sans-serif;
-      background: #f9f9fb; color: #333;
-    }
-    a { text-decoration: none; color: inherit; }
-
-    /* HERO */
-    .hero {
-      position: relative; overflow: hidden;
-      background: linear-gradient(135deg,#5b21b6,#3b82f6);
-      color: white; text-align: center; padding: 80px 20px;
-    }
-    .hero h1 {
-      font-size: 3rem; margin: 0;
-      animation: fadeInDown 1s ease;
-    }
-    .hero p {
-      font-size: 1.2rem; margin: 10px 0 30px;
-      animation: fadeInUp 1s ease 0.5s backwards;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero::before {
-      content: "";
-      position: absolute; top:0; left:0; width:200%; height:200%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
-      animation: rotateBg 20s linear infinite;
-    }
-    @keyframes rotateBg {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    /* SEARCH BAR */
-    .search-bar {
-      max-width: 400px; margin: -30px auto 40px;
+      font-family: 'Segoe UI','Arial',sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #8E0D3C 0%, #EF3B33 60%, #FDA1A2 100%);
+      overflow-x: hidden;
       position: relative;
-    }
-    .search-bar input {
-      width: 100%; padding: 12px 40px 12px 16px;
-      border-radius: 50px; border: none;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      font-size: 1rem;
-    }
-    .search-bar svg {
-      position: absolute; right: 12px; top: 50%;
-      transform: translateY(-50%); fill: #888;
+      min-height: 100vh;
     }
 
-    /* CATEGORY GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-      gap: 20px; padding: 0 20px 60px; max-width: 1200px; margin: 0 auto;
+    /* Large abstract blurred shapes */
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      animation: drift 20s infinite alternate;
     }
-    .card, .card a {
-      background: white; border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-      padding: 20px; text-align: center;
-      cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
-      opacity: 0; transform: translateY(30px);
-      animation: fadeInUp 0.6s forwards;
-      display: block;
+    .shape.one {
+      width: 500px; height: 500px;
+      background: #fff;
+      top: -200px; left: -200px;
     }
-    .card:nth-child(1) { animation-delay: 0.2s; }
-    .card:nth-child(2) { animation-delay: 0.3s; }
-    /* continue as needed */
-    .card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    .shape.two {
+      width: 600px; height: 600px;
+      background: #8E0D3C;
+      bottom: -250px; right: -250px;
     }
-    .card .icon {
-      font-size: 2.5rem; margin-bottom: 12px;
-      display: inline-block; transition: transform 0.3s;
-    }
-    .card:hover .icon {
-      transform: rotate(15deg) scale(1.1);
-    }
-    .card h3 {
-      margin: 10px 0 5px; font-size: 1.1rem;
-    }
-    .card span {
-      display: block; color: #555; font-size: 0.9rem;
+    @keyframes drift {
+      to { transform: translate(50px, 50px) scale(1.1); }
     }
 
-    /* RESPONSIVE */
-    @media (max-width:600px) {
-      .hero h1 { font-size:2.2rem; }
-      .grid { padding: 0 10px; }
+    /* Floating small emojis */
+    .floating-emoji {
+      position: absolute;
+      opacity: 0.12;
+      font-size: 4rem;
+      filter: blur(0.5px);
+      pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .emoji-1 { top: 3rem; left: 2rem; animation-delay: 0s; }
+    .emoji-2 { top: 10rem; left: 5rem; animation-delay: 2s; }
+    .emoji-3 { top: 18rem; left: 1rem; animation-delay: 4s; }
+    .emoji-4 { top: 25rem; left: 4rem; animation-delay: 1s; }
+    .emoji-5 { top: 6rem; right: 3rem; animation-delay: 3s; }
+    .emoji-6 { top: 14rem; right: 6rem; animation-delay: 5s; }
+    .emoji-7 { bottom: 8rem; left: 8rem; animation-delay: 2s; }
+    .emoji-8 { bottom: 6rem; right: 10rem; animation-delay: 4s; }
+
+    header.main-header {
+      position: relative;
+      text-align: center;
+      color: #FFF;
+      padding: 4rem 1rem 2rem;
+      z-index: 5;
+    }
+    header.main-header h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin: 0.5rem 0;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, #FDA1A2 20%, #FFF 50%, #EF3B33 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    header.main-header .emojis {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+    header.main-header p {
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: auto;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .highlight-text {
+      display: inline-block;
+      margin-top: 0.3rem;
+      font-weight: 600;
+      color: #8E0D3C;
+      background: rgba(255,255,255,0.9);
+      padding: 4px 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .categories-section {
+      position: relative;
+      background: rgba(255,255,255,0.95);
+      margin: 2rem auto 4rem;
+      padding: 2rem 1rem 3rem;
+      max-width: 1200px;
+      border-radius: 30px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 3px 13px rgba(142,13,60,0.2);
+      z-index: 5;
+    }
+    .categories-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .category-card {
+      background: linear-gradient(135deg,#FFF 70%,#FDA1A2 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 200px;
+      padding: 2rem 1rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      border-top: 5px solid #EF3B33;
+    }
+    .category-card:hover {
+      transform: translateY(-8px) scale(1.04) rotate(-1.2deg);
+      box-shadow: 0 20px 40px rgba(142,13,60,0.4),0 3px 10px rgba(0,0,0,0.2);
+      border-top: 5px solid #8E0D3C;
+      z-index: 6;
+    }
+    .category-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #EF3B33;
+      transition: color 0.3s;
+    }
+    .category-card:hover .category-icon {
+      color: #8E0D3C;
+    }
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #8E0D3C;
+      margin-bottom: 0.3rem;
+    }
+    .category-desc {
+      font-size: 0.95rem;
+      color: #555;
+      opacity: 0.8;
+    }
+
+    @media (max-width:768px) {
+      .categories-grid { gap: 1.5rem; }
+      .category-card { width: 45vw; }
+    }
+    @media (max-width:480px) {
+      header.main-header h1 { font-size: 2.2rem; }
+      .category-card { width: 90vw; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
+  <!-- Abstract blurred shapes -->
+  <div class="shape one"></div>
+  <div class="shape two"></div>
+
+  <!-- Floating side emojis -->
+  <div class="floating-emoji emoji-1">🎲</div>
+  <div class="floating-emoji emoji-2">🌱</div>
+  <div class="floating-emoji emoji-3">💌</div>
+  <div class="floating-emoji emoji-4">🎨</div>
+  <div class="floating-emoji emoji-5">📚</div>
+  <div class="floating-emoji emoji-6">💻</div>
+  <div class="floating-emoji emoji-7">✨</div>
+  <div class="floating-emoji emoji-8">🛍️</div>
+
+  <header class="main-header">
+    <span class="emojis">✨🎁 🌈 🚀 💻 🎨 📚 🛍️✨</span>
     <h1>Eva’s Trendify Hub</h1>
-    <p>Explore our hottest categories and discover your favorite products</p>
+    <p>
+      Explore our hottest categories and discover your favorite products.<br>
+      <span class="highlight-text">Fun, deals, and digital finds—for everyone!</span>
+    </p>
+  </header>
+
+  <section class="categories-section">
+    <div class="categories-grid">
+      <div class="category-card" onclick="location.href='customgifts.html'">
+        <div class="category-icon">🎁</div>
+        <div class="category-title">Custom Gifts</div>
+        <div class="category-desc">Personalized essentials</div>
+      </div>
+      <div class="category-card" onclick="location.href='fitness.html'">
+        <div class="category-icon">💪</div>
+        <div class="category-title">Fitness & Health</div>
+        <div class="category-desc">Wellness essentials</div>
+      </div>
+      <div class="category-card" onclick="location.href='fashionmen.html'">
+        <div class="category-icon">👕</div>
+        <div class="category-title">Fashion (Men)</div>
+        <div class="category-desc">Trending styles</div>
+      </div>
+      <div class="category-card" onclick="location.href='fashionwomenkids.html'">
+        <div class="category-icon">👗</div>
+        <div class="category-title">Fashion (Women & Kids)</div>
+        <div class="category-desc">Stylish finds</div>
+      </div>
+      <div class="category-card" onclick="location.href='homegarden.html'">
+        <div class="category-icon">🏡</div>
+        <div class="category-title">Home & Garden</div>
+        <div class="category-desc">Spruce up your space</div>
+      </div>
+      <div class="category-card" onclick="location.href='coloringbooks.html'">
+        <div class="category-icon">🎨</div>
+        <div class="category-title">Coloring Books</div>
+        <div class="category-desc">Creative fun for all ages</div>
+      </div>
+      <div class="category-card" onclick="location.href='animalspets.html'">
+        <div class="category-icon">🐾</div>
+        <div class="category-title">Animals & Pets</div>
+        <div class="category-desc">Adorable affiliate picks</div>
+      </div>
+      <div class="category-card" onclick="location.href='fooddrink.html'">
+        <div class="category-icon">🍔</div>
+        <div class="category-title">Food & Drink</div>
+        <div class="category-desc">Delicious products</div>
+      </div>
+      <div class="category-card" onclick="location.href='fungames.html'">
+        <div class="category-icon">🎲</div>
+        <div class="category-title">Fun & Games</div>
+        <div class="category-desc">Playful picks</div>
+      </div>
+      <div class="category-card" onclick="location.href='computerinternet.html'">
+        <div class="category-icon">💻</div>
+        <div class="category-title">Computer & Internet</div>
+        <div class="category-desc">Digital solutions</div>
+      </div>
+      <div class="category-card" onclick="location.href='education.html'">
+        <div class="category-icon">📚</div>
+        <div class="category-title">Education</div>
+        <div class="category-desc">Learning resources</div>
+      </div>
+      <div class="category-card" onclick="location.href='emailmarketing.html'">
+        <div class="category-icon">📧</div>
+        <div class="category-title">Email Marketing</div>
+        <div class="category-desc">Grow your list</div>
+      </div>
+      <div class="category-card" onclick="location.href='hobbycraft.html'">
+        <div class="category-icon">🧶</div>
+        <div class="category-title">Hobby & Craft</div>
+        <div class="category-desc">Creative supplies</div>
+      </div>
+      <div class="category-card" onclick="location.href='onlinemarketingebusiness.html'">
+        <div class="category-icon">📈</div>
+        <div class="category-title">Online Marketing & E-Business</div>
+        <div class="category-desc">Scale your business</div>
+      </div>
+      <div class="category-card" onclick="location.href='software.html'">
+        <div class="category-icon">💾</div>
+        <div class="category-title">Software</div>
+        <div class="category-desc">Top tools</div>
+      </div>
+      <div class="category-card" onclick="location.href='datingromance.html'">
+        <div class="category-icon">💕</div>
+        <div class="category-title">Dating & Romance</div>
+        <div class="category-desc">Love & relationship guides</div>
+      </div>
+      <div class="category-card" onclick="location.href='businessinvestment.html'">
+        <div class="category-icon">💼</div>
+        <div class="category-title">Business & Investment</div>
+        <div class="category-desc">Grow your wealth</div>
+      </div>
+      <div class="category-card" onclick="location.href='personaldevelopment.html'">
+        <div class="category-icon">🌟</div>
+        <div class="category-title">Personal Development</div>
+        <div class="category-desc">Upgrade your skills</div>
+      </div>
+      <div class="category-card" onclick="location.href='survival.html'">
+        <div class="category-icon">🏕️</div>
+        <div class="category-title">Survival</div>
+        <div class="category-desc">Prep & outdoors tips</div>
+      </div>
+      <div class="category-card" onclick="location.href='travelculture.html'">
+        <div class="category-icon">✈️</div>
+        <div class="category-title">Travel & Culture</div>
+        <div class="category-desc">Explore the world</div>
+      </div>
+      <div class="category-card" onclick="location.href='more.html'">
+        <div class="category-icon">🔍</div>
+        <div class="category-title">More Categories</div>
+        <div class="category-desc">Coming soon</div>
+      </div>
+    </div>
   </section>
-
-  <!-- SEARCH BAR -->
-  <div class="search-bar">
-    <input id="searchInput" type="text" placeholder="Search categories…"/>
-    <svg height="24" width="24" viewBox="0 0 24 24">
-      <path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.24 5.08 12.16 2 8.62 2 5.08 2 2 5.08 2 8.62s3.08 6.62 6.62 6.62a6.471 6.471 0 005.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5z"/>
-    </svg>
-  </div>
-
-  <!-- CATEGORY GRID -->
-  <div class="grid" id="categoryGrid">
-    <div class="card"><div class="icon">🎁</div><h3>Custom Gifts</h3><span>Personalized essentials</span></div>
-    <a href="fitness.html" class="card"><div class="icon">💪</div><h3>Fitness & Health</h3><span>Wellness essentials</span></a>
-    <div class="card"><div class="icon">👕</div><h3>Fashion (Men)</h3><span>Trending styles</span></div>
-    <div class="card"><div class="icon">👗</div><h3>Fashion (Women & Kids)</h3><span>Stylish finds</span></div>
-    <div class="card"><div class="icon">🏡</div><h3>Home & Garden</h3><span>Spruce up your space</span></div>
-    <div class="card"><div class="icon">🎨</div><h3>Coloring Books</h3><span>Creative fun for all ages</span></div>
-    <div class="card"><div class="icon">🐾</div><h3>Animals & Pets</h3><span>Adorable affiliate picks</span></div>
-    <div class="card"><div class="icon">🍔</div><h3>Food & Drink</h3><span>Delicious products</span></div>
-    <div class="card"><div class="icon">🎲</div><h3>Fun & Games</h3><span>Playful picks</span></div>
-    <div class="card"><div class="icon">💻</div><h3>Computer & Internet</h3><span>Digital solutions</span></div>
-    <div class="card"><div class="icon">📚</div><h3>Education</h3><span>Learning resources</span></div>
-    <div class="card"><div class="icon">✉️</div><h3>Email Marketing</h3><span>Grow your list</span></div>
-    <div class="card"><div class="icon">🎨</div><h3>Hobby & Craft</h3><span>Creative supplies</span></div>
-    <div class="card"><div class="icon">💼</div><h3>Online Marketing & E-Business</h3><span>Scale your business</span></div>
-    <div class="card"><div class="icon">🖥️</div><h3>Software</h3><span>Top tools</span></div>
-  </div>
-
-  <footer style="text-align:center;padding:20px;color:#777;">
-    © 2025 Eva’s Trendify Hub. All rights reserved.
-  </footer>
-
-  <script>
-  // Live Search Filter
-  const searchInput = document.getElementById('searchInput');
-  const cards = document.querySelectorAll('.grid .card');
-  searchInput.addEventListener('input', e => {
-    const term = e.target.value.toLowerCase();
-    cards.forEach(c => {
-      const txt = c.querySelector('h3').textContent.toLowerCase();
-      c.style.display = txt.includes(term) ? 'block' : 'none';
-    });
-  });
-
-  // Card Click Navigation (for non-<a> cards)
-  document.querySelectorAll('.grid .card').forEach(card => {
-    if (!card.hasAttribute('href')) {
-      card.onclick = () => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        let page;
-        
-        // Explicit mapping to your actual filenames
-        switch(title) {
-          case 'custom gifts': page = 'customgifts'; break;
-          case 'fashion (men)': page = 'fashionmen'; break;
-          case 'fashion (women & kids)': page = 'fashionwomenkids'; break;
-          case 'home & garden': page = 'homegarden'; break;
-          case 'coloring books': page = 'coloringbooks'; break;
-          case 'animals & pets': page = 'animalspets'; break;
-          case 'food & drink': page = 'fooddrink'; break;
-          case 'fun & games': page = 'fungames'; break;
-          case 'computer & internet': page = 'computerinternet'; break;
-          case 'education': page = 'education'; break;
-          case 'email marketing': page = 'emailmarketing'; break;
-          case 'hobby & craft': page = 'hobbycraft'; break;
-          case 'online marketing & e-business': page = 'onlinemarketingebusiness'; break;
-          case 'software': page = 'software'; break;
-          default: 
-            page = title.replace(/[\s&()]+/g,'').toLowerCase();
-        }
-        
-        window.location.href = page + '.html';
-      };
-    }
-  });
-</script>
 </body>
 </html>
