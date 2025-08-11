@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fashion (Men) - Eva's Trendify Hub</title>
+  <title>🧥Fashion (Men)🩳 - Eva's Trendify Hub</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,6 +15,8 @@
       color: white;
       text-align: center;
       padding: 20px;
+      position: relative;
+      overflow: hidden;
     }
     .header h1 {
       margin: 0;
@@ -33,33 +35,37 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 30px 20px; /* Better spacing */
-      gap: 25px; /* Space between cards */
+      padding: 30px 20px;
+      gap: 25px;
     }
     .product-card {
       background-color: white;
-      border-radius: 12px; /* More rounded */
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Better shadow */
-      width: 320px; /* Slightly wider */
-      padding: 20px; /* More padding */
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 320px;
+      padding: 20px;
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
     }
-    /* HOVER EFFECT */
     .product-card:hover {
-      transform: translateY(-8px) scale(1.02); /* Lift and slight scale */
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Stronger shadow */
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
-    /* BETTER IMAGE SIZING */
     .product-card img {
       width: 100%;
-      height: 250px; /* Fixed height for consistency */
-      object-fit: cover; /* Better image display */
+      height: auto;
+      object-fit: contain;
       border-radius: 8px;
-      margin-bottom: 15px; /* Space below image */
+      margin-bottom: 15px;
+      background-color: #f3f4f6;
+      border: 2px solid #fed7aa;
+      transition: transform 0.3s ease;
     }
-    /* BADGES */
+    .product-card:hover img {
+      transform: scale(1.05);
+      border-color: #1e3a8a;
+    }
     .badge {
       position: absolute;
       top: 15px;
@@ -77,7 +83,6 @@
       color: #1f2937;
       font-weight: bold;
     }
-    /* DESCRIPTION WITH EXPAND */
     .description {
       font-size: 14px;
       color: #6b7280;
@@ -87,7 +92,7 @@
     }
     .description.short {
       display: -webkit-box;
-      -webkit-line-clamp: 2; /* Show only 2 lines */
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       cursor: pointer;
@@ -107,7 +112,6 @@
       font-size: 18px;
       margin: 15px 0;
     }
-    /* BETTER BUTTON */
     .shop-btn {
       display: inline-block;
       margin-top: 15px;
@@ -131,11 +135,81 @@
       font-size: 16px;
       color: #6b7280;
     }
+    /* ---- Floating emoji styles ---- */
+    .header-emoji-left {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.7rem;
+      font-size: 1.7rem;
+      opacity: 0.85;
+      animation: danceLeft 4s ease-in-out infinite;
+    }
+    .header-emoji-right {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.7rem;
+      font-size: 1.7rem;
+      opacity: 0.85;
+      animation: danceRight 4s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .header-emoji-left span, .header-emoji-right span {
+      display: inline-block;
+      animation: float 2s ease-in-out infinite;
+    }
+    .header-emoji-left span:nth-child(2) { animation-delay: 0.5s; }
+    .header-emoji-left span:nth-child(3) { animation-delay: 1s; }
+    .header-emoji-left span:nth-child(4) { animation-delay: 1.3s; }
+    .header-emoji-right span:nth-child(2) { animation-delay: 0.6s; }
+    .header-emoji-right span:nth-child(3) { animation-delay: 1.2s; }
+    .header-emoji-right span:nth-child(4) { animation-delay: 1.6s; }
+    @keyframes danceLeft {
+      0%, 100% { transform: translateY(-50%) rotate(-6deg);}
+      50% { transform: translateY(-55%) rotate(7deg);}
+    }
+    @keyframes danceRight {
+      0%, 100% { transform: translateY(-50%) rotate(7deg);}
+      50% { transform: translateY(-55%) rotate(-6deg);}
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1);}
+      50% { transform: translateY(-8px) scale(1.12);}
+    }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>Fashion (Men)</h1>
+    <div class="header-emoji-left">
+      <span>👔</span>
+      <span>🧥</span>
+      <span>👞</span>
+      <span>⌚</span>
+      <span>🕶️</span>
+<span>👘</span>
+      <span>🧢</span>
+      <span>👟</span>
+      <span>✨</span>
+      <span>🧣</span>
+    </div>
+    <div class="header-emoji-right">
+      <span>🧢</span>
+      <span>👖</span>
+      <span>🥾</span>
+      <span>🩳</span>
+      <span>💼</span>
+<span>👕</span>
+      <span>🧥</span>
+      <span>👞</span>
+      <span>⌚</span>
+      <span>🕶️</span>
+    </div>
+    <h1>👕🧢Fashion (Men)🩳🥾</h1>
     <p>Discover trending men's fashion and style products</p>
     <a href="index.html">← Back to Home</a>
   </div>
@@ -148,13 +222,10 @@
   <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
 
-    // Function to truncate text to specific length
     function truncateText(text, maxLength = 120) {
       if (text.length <= maxLength) return text;
       return text.substr(0, maxLength) + '...';
     }
-
-    // Function to add urgency badges
     function getRandomBadge() {
       const badges = ['🔥 Hot', '⭐ Best Seller', '🚀 Trending', '💎 Premium', '⚡ Limited'];
       return badges[Math.floor(Math.random() * badges.length)];
@@ -165,22 +236,17 @@
       .then(data => {
         const container = document.getElementById("product-container");
         const noProducts = document.getElementById("no-products");
-
         const mensFashion = data.filter(item => item.Category && item.Category.trim() === "Fashion (Men)");
-
         if (mensFashion.length === 0) {
           noProducts.style.display = "block";
         } else {
           noProducts.style.display = "none";
-
           mensFashion.forEach((product, index) => {
             const productLink = product["Product Link "] || product["Product Link"];
             if (!productLink || productLink.trim() === "") return;
-
             const fullDescription = product.Description || "";
             const shortDescription = truncateText(fullDescription, 100);
             const badge = getRandomBadge();
-
             const card = document.createElement("div");
             card.className = "product-card";
             card.innerHTML = `
@@ -194,8 +260,6 @@
               <div class="price">${product.Price || ""}</div>
               <a href="${productLink}" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now 🛍️</a>
             `;
-
-            // Add hover expand functionality
             if (fullDescription.length > 100) {
               const descElement = card.querySelector(`#desc-${index}`);
               descElement.addEventListener('mouseenter', () => {
@@ -207,7 +271,6 @@
                 descElement.className = "description short";
               });
             }
-
             container.appendChild(card);
           });
         }
