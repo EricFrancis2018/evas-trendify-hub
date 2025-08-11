@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
 }
 @keyframes float {
-  0%,100% { transform: translateY(0px) rotate(0deg); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(5deg); }
 }
 .floating-pencil {
@@ -32,6 +32,7 @@ body {
   padding: 20px;
   position: relative;
   box-shadow: 0 4px 15px rgba(245,158,11,0.3);
+  overflow: hidden;
 }
 .header h1 {
   margin: 0;
@@ -47,6 +48,56 @@ body {
   text-decoration: underline;
   font-size: 14px;
 }
+/* Floating emojis beside the header title */
+.header-emoji-left,
+.header-emoji-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  opacity: 0.8;
+  pointer-events: none;
+  flex-wrap: nowrap;
+  min-width: 340px; /* ensures all 10 emojis fit in one line */
+  animation: float 3s ease-in-out infinite;
+}
+.header-emoji-left { left: 12px; }
+.header-emoji-right { right: 12px; }
+
+.header-emoji-left span, .header-emoji-right span {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+/* Staggered animation delays for left emojis */
+.header-emoji-left span:nth-child(1) { animation-delay: 0.0s; }
+.header-emoji-left span:nth-child(2) { animation-delay: 0.3s; }
+.header-emoji-left span:nth-child(3) { animation-delay: 0.6s; }
+.header-emoji-left span:nth-child(4) { animation-delay: 0.9s; }
+.header-emoji-left span:nth-child(5) { animation-delay: 1.2s; }
+.header-emoji-left span:nth-child(6) { animation-delay: 1.5s; }
+.header-emoji-left span:nth-child(7) { animation-delay: 1.8s; }
+.header-emoji-left span:nth-child(8) { animation-delay: 2.1s; }
+.header-emoji-left span:nth-child(9) { animation-delay: 2.4s; }
+.header-emoji-left span:nth-child(10) { animation-delay: 2.7s; }
+/* Staggered animation delays for right emojis */
+.header-emoji-right span:nth-child(1) { animation-delay: 0.15s; }
+.header-emoji-right span:nth-child(2) { animation-delay: 0.45s; }
+.header-emoji-right span:nth-child(3) { animation-delay: 0.75s; }
+.header-emoji-right span:nth-child(4) { animation-delay: 1.05s; }
+.header-emoji-right span:nth-child(5) { animation-delay: 1.35s; }
+.header-emoji-right span:nth-child(6) { animation-delay: 1.65s; }
+.header-emoji-right span:nth-child(7) { animation-delay: 1.95s; }
+.header-emoji-right span:nth-child(8) { animation-delay: 2.25s; }
+.header-emoji-right span:nth-child(9) { animation-delay: 2.55s; }
+.header-emoji-right span:nth-child(10) { animation-delay: 2.85s; }
+
+@keyframes float {
+  0%,100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-60%) translateX(5px); }
+}
+
 .product-grid {
   display: flex;
   flex-wrap: wrap;
@@ -91,15 +142,13 @@ body {
 }
 .product-card img {
   width: 100%;
-  height: auto;         /* let image scale by its own aspect ratio */
-  object-fit: contain;  /* ensure the entire image is visible */
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
   margin-bottom: 15px;
   background-color: #f3f4f6;
   border: 2px solid #fed7aa;
   transition: transform 0.3s ease;
-  border: 2px solid #fed7aa;
-  background-color: #f3f4f6;
 }
 .product-card:hover img {
   transform: scale(1.05);
@@ -123,7 +172,6 @@ body {
   font-weight: bold;
   box-shadow: 0 2px 8px rgba(245,158,11,0.4);
 }
-/* Download count area just below image */
 .download-count {
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
@@ -214,8 +262,13 @@ body {
   color: #6b7280;
 }
 @media(max-width:600px){
-  .product-grid { padding: 20px; gap: 15px; }
-  .product-card { width: 90vw; }
+  .product-grid {
+    padding: 20px;
+    gap: 15px;
+  }
+  .product-card {
+    width: 90vw;
+  }
 }
 </style>
 </head>
@@ -225,13 +278,21 @@ body {
 <div class="floating-pencil pencil-2">🖍️</div>
 <div class="floating-pencil pencil-3">🖊️</div>
 <div class="header">
-<h1>🎨 Coloring Books 🌈</h1>
-<p>Creative and relaxing digital coloring books for all ages</p>
-<a href="index.html">← Back to Home</a>
+  <div class="header-emoji-left">
+    <span>🎨</span><span>🖍️</span><span>✂️</span><span>🖌️</span><span>🖊️</span>
+    <span>🖼️</span><span>📚</span><span>📖</span><span>🧩</span><span>📝</span>
+  </div>
+  <div class="header-emoji-right">
+    <span>🎨</span><span>🖌️</span><span>🖍️</span><span>🖊️</span><span>🖼️</span>
+    <span>📚</span><span>📖</span><span>🧩</span><span>📝</span><span>✏️</span>
+  </div>
+  <h1>🎨 Coloring Books 🌈</h1>
+  <p>Creative and relaxing digital coloring books for all ages</p>
+  <a href="index.html">← Back to Home</a>
 </div>
 <div id="product-container" class="product-grid"></div>
 <div id="no-products" class="no-products" style="display:none;">
-No products found in Coloring Books category.
+  No products found in Coloring Books category.
 </div>
 <script>
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
