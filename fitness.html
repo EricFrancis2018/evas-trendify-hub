@@ -15,6 +15,7 @@
       color: white;
       text-align: center;
       padding: 20px;
+      position: relative;
     }
     .header h1 {
       margin: 0;
@@ -51,15 +52,15 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     .product-card img {
-      width: 100%;
-      max-height: 250px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      background-color: #f3f4f6;
-      border: 2px solid #fed7aa;
-      transition: transform 0.3s ease;
-    }
+  width: 100%;
+  height: auto;          /* allow natural image height */
+  object-fit: contain;   /* show entire image without cropping */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #f3f4f6;
+  border: 2px solid #fed7aa;
+  transition: transform 0.3s ease;
+}
     .product-card:hover img {
       transform: scale(1.05);
       border-color: #dc2626;
@@ -150,15 +151,81 @@
       font-size: 16px;
       color: #6b7280;
     }
+    .header-emoji-left {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.8rem;
+      font-size: 1.8rem;
+      opacity: 0.8;
+      animation: danceLeft 4s ease-in-out infinite;
+    }
+    .header-emoji-right {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.8rem;
+      font-size: 1.8rem;
+      opacity: 0.8;
+      animation: danceRight 4s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .header-emoji-left span, .header-emoji-right span {
+      display: inline-block;
+      animation: float 2s ease-in-out infinite;
+    }
+    .header-emoji-left span:nth-child(2) { animation-delay: 0.5s; }
+    .header-emoji-left span:nth-child(3) { animation-delay: 1s; }
+    .header-emoji-right span:nth-child(2) { animation-delay: 0.7s; }
+    .header-emoji-right span:nth-child(3) { animation-delay: 1.4s; }
+    
+    @keyframes danceLeft {
+      0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+      50% { transform: translateY(-60%) rotate(5deg); }
+    }
+    @keyframes danceRight {
+      0%, 100% { transform: translateY(-50%) rotate(5deg); }
+      50% { transform: translateY(-60%) rotate(-5deg); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-8px) scale(1.1); }
+    }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>Fitness & Health</h1>
+    <div class="header-emoji-left">
+      <span>💊</span>
+      <span>🌿</span>
+      <span>💪</span>
+<span>🍑</span>
+<span>🍇</span>
+<span>🌰</span>
+<span>🥛</span>
+<span>🥝</span>
+    </div>
+    <div class="header-emoji-right">
+      <span>⚡</span>
+      <span>🧠</span>
+      <span>🥦</span>
+<span>🥙</span>
+<span>🍌</span>
+<span>🥕</span>
+<span>🍋</span>
+<span>🍎</span>
+    </div>
+    <h1>
+      Fitness &amp; Health
+      <span class="header-icons">🏋️‍♀️ 💪 🏃‍♂️ 🥗 🧘‍♀️</span>
+    </h1>
     <p>Discover top digital products for fitness and wellness</p>
     <a href="index.html">← Back to Home</a>
   </div>
-
   <div id="product-container" class="product-grid"></div>
   <div id="no-products" class="no-products" style="display:none;">
     No products found in Fitness & Health category.
