@@ -15,14 +15,23 @@
   </script>
   <style>
     body {font-family:Arial,sans-serif;margin:0;background:linear-gradient(135deg,#d1fae5,#f0fdf4);overflow-x:hidden;}
-    .header {background:linear-gradient(135deg,#059669,#10b981);color:white;text-align:center;padding:20px;position:relative;box-shadow:0 4px 15px rgba(5,150,105,0.3);}
+    .header {background:linear-gradient(135deg,#059669,#10b981);color:white;text-align:center;padding:20px;position:relative;box-shadow:0 4px 15px rgba(5,150,105,0.3);overflow:hidden;}
     .header h1 {margin:0;font-size:32px;text-shadow:2px2px4px rgba(0,0,0,0.2);}
     .header p {margin:5px 0 10px;font-size:16px;}
     .header a {color:#d1fae5;text-decoration:underline;font-size:14px;}
     .product-grid {display:flex;flex-wrap:wrap;justify-content:center;padding:30px 20px;gap:25px;}
     .product-card {background:white;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.1);width:320px;padding:20px;text-align:center;transition:transform 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;border:3px solid transparent;}
     .product-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 15px 35px rgba(5,150,105,0.3);border-color:#34d399;}
-    .product-card img{width:100%;height:250px;object-fit:contain;border-radius:10px;margin-bottom:15px;transition:transform 0.3s ease;border:2px solid #a7f3d0;background:#ecfdf5;}
+    .product-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background-color: #f3f4f6;
+      border: 2px solid #fed7aa;
+      transition: transform 0.3s ease;
+    }
     .product-card:hover img{transform:scale(1.05);border-color:#34d399;}
     .badge{position:absolute;top:15px;right:15px;background:#059669;color:white;padding:6px 12px;border-radius:15px;font-size:11px;font-weight:bold;animation:float 2s ease-in-out infinite;}
     .product-card h3{font-size:19px;margin:15px 0 10px;color:#065f46;font-weight:bold;}
@@ -42,15 +51,81 @@
     .instant-download{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:white;padding:4px 8px;border-radius:10px;font-size:10px;font-weight:bold;margin-top:5px;display:inline-block;}
     .no-products{text-align:center;padding:50px;font-size:16px;color:#4b5563;}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+    /* ---- Floating emoji styles ---- */
+    .header-emoji-left {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.7rem;
+      font-size: 1.7rem;
+      opacity: 0.87;
+      animation: danceLeft 4s ease-in-out infinite;
+    }
+    .header-emoji-right {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.7rem;
+      font-size: 1.7rem;
+      opacity: 0.87;
+      animation: danceRight 4s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .header-emoji-left span, .header-emoji-right span {
+      display: inline-block;
+      animation: float 2s ease-in-out infinite;
+    }
+    .header-emoji-left span:nth-child(2) { animation-delay: 0.45s; }
+    .header-emoji-left span:nth-child(3) { animation-delay: 0.9s; }
+    .header-emoji-left span:nth-child(4) { animation-delay: 1.25s; }
+    .header-emoji-right span:nth-child(2) { animation-delay: 0.6s; }
+    .header-emoji-right span:nth-child(3) { animation-delay: 1.15s; }
+    .header-emoji-right span:nth-child(4) { animation-delay: 1.6s; }
+    @keyframes danceLeft {
+      0%, 100% { transform: translateY(-50%) rotate(-6deg);}
+      50% { transform: translateY(-55%) rotate(9deg);}
+    }
+    @keyframes danceRight {
+      0%, 100% { transform: translateY(-50%) rotate(8deg);}
+      50% { transform: translateY(-55%) rotate(-8deg);}
+    }
   </style>
 </head>
 <body>
   <div class="header">
+    <div class="header-emoji-left">
+      <span>🐶</span>
+      <span>🐱</span>
+      <span>🦜</span>
+      <span>🐾</span>
+      <span>🐰</span>
+<span>🐠</span>
+      <span>🐡</span>
+      <span>🐟</span>
+      <span>🐈</span>
+      <span>🐩</span>
+    </div>
+    <div class="header-emoji-right">
+      <span>🦁</span>
+      <span>🐢</span>
+      <span>🐟</span>
+      <span>🦎</span>
+      <span>🐹</span>
+<span>🐄</span>
+      <span>🐶</span>
+      <span>🐕‍🦺</span>
+      <span>🐾</span>
+      <span>🐚</span>
+    </div>
     <h1>🐾 Animals & Pets</h1>
     <p>Curated affiliate picks for animal lovers and pet owners</p>
     <a href="index.html">← Back to Home</a>
   </div>
-
+  
   <div id="product-container" class="product-grid"></div>
   <div id="no-products" class="no-products" style="display:none;">No products found in Animals & Pets category.</div>
 
@@ -81,7 +156,6 @@
           <div class="badge">${b}</div>
           <h3>${p["Product Name"]}</h3>
           <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rt}/5</span></div>
-          <div class="download-count">📥 Downloaded ${dl} times</div>
           <div class="description short" id="d${i}">${short}${full.length>100?'<div class="expand-text">• • • hover to read more</div>':''}</div>
           <div class="price">${p.Price||""}</div>
           <div class="instant-download">⚡ Instant Download</div>
