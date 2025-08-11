@@ -15,6 +15,8 @@
       color: white;
       text-align: center;
       padding: 20px;
+      position: relative;
+      overflow: hidden;
     }
     .header h1 {
       margin: 0;
@@ -52,10 +54,17 @@
     }
     .product-card img {
       width: 100%;
-      height: 250px;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       border-radius: 8px;
       margin-bottom: 15px;
+      background-color: #f3f4f6;
+      border: 2px solid #fed7aa;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+      border-color: #15803d;
     }
     .badge {
       position: absolute;
@@ -126,11 +135,81 @@
       font-size: 16px;
       color: #6b7280;
     }
+    /* ---- Emoji floating decorations ---- */
+    .header-emoji-left {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.7rem;
+      font-size: 1.7rem;
+      opacity: 0.85;
+      animation: danceLeft 4s ease-in-out infinite;
+    }
+    .header-emoji-right {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.7rem;
+      font-size: 1.7rem;
+      opacity: 0.85;
+      animation: danceRight 4s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .header-emoji-left span, .header-emoji-right span {
+      display: inline-block;
+      animation: float 2s ease-in-out infinite;
+    }
+    .header-emoji-left span:nth-child(2) { animation-delay: 0.5s; }
+    .header-emoji-left span:nth-child(3) { animation-delay: 1s; }
+    .header-emoji-left span:nth-child(4) { animation-delay: 1.3s; }
+    .header-emoji-right span:nth-child(2) { animation-delay: 0.6s; }
+    .header-emoji-right span:nth-child(3) { animation-delay: 1.2s; }
+    .header-emoji-right span:nth-child(4) { animation-delay: 1.6s; }
+    @keyframes danceLeft {
+      0%, 100% { transform: translateY(-50%) rotate(-6deg);}
+      50% { transform: translateY(-55%) rotate(7deg);}
+    }
+    @keyframes danceRight {
+      0%, 100% { transform: translateY(-50%) rotate(7deg);}
+      50% { transform: translateY(-55%) rotate(-6deg);}
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1);}
+      50% { transform: translateY(-8px) scale(1.12);}
+    }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>Home & Garden</h1>
+    <div class="header-emoji-left">
+      <span>🏡</span>
+      <span>🐛</span>
+      <span>🌿</span>
+      <span>🛋️</span>
+      <span>🌲</span>
+<span>🌼</span>
+<span>🌳</span>
+<span>🍃</span>
+<span>🍂</span>
+<span>🌹</span>
+    </div>
+    <div class="header-emoji-right">
+      <span>🌿</span>
+<span>🍁</span>
+<span>🕷️</span>
+<span>🏘️</span>
+<span>💐</span>
+<span>🌻</span>
+      <span>🐌</span>
+      <span>🌼</span>
+      <span>🍃</span>
+      <span>🐜</span>
+    </div>
+    <h1>🏘️🍃Home & Garden🌼🌻</h1>
     <p>Curated affiliate picks for your living space and garden 🌿</p>
     <a href="index.html">← Back to Home</a>
   </div>
@@ -142,38 +221,30 @@
 
   <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
-
     function truncateText(text, maxLength = 120) {
       if (text.length <= maxLength) return text;
       return text.substr(0, maxLength) + '...';
     }
-
     function getRandomBadge() {
       const badges = ['🌱 Eco-Friendly', '🏡 Home Essential', '🌟 Top Rated', '🔥 Popular', '💚 Best Choice'];
       return badges[Math.floor(Math.random() * badges.length)];
     }
-
     fetch(SHEET_URL)
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById("product-container");
         const noProducts = document.getElementById("no-products");
-
         const homeGarden = data.filter(item => item.Category && item.Category.trim() === "Home & Garden");
-
         if (homeGarden.length === 0) {
           noProducts.style.display = "block";
         } else {
           noProducts.style.display = "none";
-
           homeGarden.forEach((product, index) => {
             const productLink = product["Product Link "] || product["Product Link"];
             if (!productLink || productLink.trim() === "") return;
-
             const fullDescription = product.Description || "";
             const shortDescription = truncateText(fullDescription, 100);
             const badge = getRandomBadge();
-
             const card = document.createElement("div");
             card.className = "product-card";
             card.innerHTML = `
@@ -187,7 +258,6 @@
               <div class="price">${product.Price || ""}</div>
               <a href="${productLink}" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now 🏡</a>
             `;
-
             if (fullDescription.length > 100) {
               const descElement = card.querySelector(`#desc-${index}`);
               descElement.addEventListener('mouseenter', () => {
@@ -199,7 +269,6 @@
                 descElement.className = "description short";
               });
             }
-
             container.appendChild(card);
           });
         }
