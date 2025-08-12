@@ -184,10 +184,10 @@
           <div class="badge">${badge()}</div>
           <h3>${p["Product Name"]}</h3>
           <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
-          <div class="download-count">📥 Downloaded ${downloads()} times</div>
+          
           <div class="description short" id="desc-${i}">${short}${full.length>100?'<div class="expand-text">• • • hover to read more</div>': ''}</div>
           <div class="price">${p.Price || ""}</div>
-          <div class="instant-download">⚡ Instant Download</div>
+          
         `;
         card.innerHTML += `<a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 👗</a>`;
         if(full.length>100){
