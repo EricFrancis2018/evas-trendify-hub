@@ -14,38 +14,286 @@
     gtag('config', 'G-XXXXXXXXXX');
   </script>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: linear-gradient(135deg,#fef3c7,#fde68a); overflow-x: hidden; }
-    .header { background: linear-gradient(135deg,#ec4899,#f97316); color: white; text-align: center; padding: 20px; box-shadow: 0 4px 15px rgba(236,72,153,0.3); }
-    .header h1 { margin: 0; font-size: 32px; }
-    .header p { margin: 5px 0 10px; font-size: 16px; }
-    .header a { color: #fdf2f8; text-decoration: underline; font-size: 14px; }
-    .product-grid { display: flex; flex-wrap: wrap; justify-content: center; padding: 30px 20px; gap: 25px; }
-    .product-card { background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; padding: 20px; text-align: center; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
-    .product-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(236,72,153,0.3); }
-    .product-card img { width: 100%; height: 250px; object-fit: contain; border-radius: 10px; margin-bottom: 15px; border: 2px solid #fde68a; background: #fffbeb; transition: transform 0.3s ease; }
-    .product-card:hover img { transform: scale(1.05); }
-    .badge { position: absolute; top: 15px; right: 15px; background: #ec4899; color: white; padding: 6px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; }
-    .product-card h3 { font-size: 19px; margin: 15px 0 10px; color: #be185d; font-weight: bold; }
-    .rating { display: flex; justify-content: center; align-items: center; gap: 5px; margin: 10px 0; color: #f59e0b; }
-    .stars { color: #fbbf24; font-size: 16px; }
-    .download-count { background: linear-gradient(135deg,#f97316,#fb923c); color: white; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; margin: 8px 0; display: inline-block; }
-    .description { font-size: 14px; color: #4b5563; line-height: 1.5; margin-bottom: 15px; min-height: 60px; }
-    .description.short { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
-    .description.expanded { display: block; }
-    .expand-text { color: #ec4899; font-size: 12px; cursor: pointer; margin-top: 5px; }
-    .price { font-weight: bold; color: #16a34a; font-size: 20px; margin: 15px 0; }
-    .price::before { content: "$"; }
-    .instant-download { background: linear-gradient(135deg,#8b5cf6,#7c3aed); color: white; padding: 4px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; margin-top: 5px; display: inline-block; }
-    .shop-btn { display: inline-block; margin-top: 15px; background: linear-gradient(135deg,#ec4899,#f97316); color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(236,72,153,0.4); position: relative; overflow: hidden; }
-    .shop-btn:hover { background: linear-gradient(135deg,#db2777,#ea580c); transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 20px rgba(236,72,153,0.6); }
-    .shop-btn::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); transition: left 0.5s; }
-    .shop-btn:hover::before { left: 100%; }
-    .no-products { text-align: center; padding: 50px; font-size: 16px; color: #4b5563; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg,#fef3c7,#fde68a);
+      overflow-x: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg,#ec4899,#f97316);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(236,72,153,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    .header p {
+      margin: 5px 0 10px;
+      font-size: 16px;
+    }
+    .header a {
+      color: #fdf2f8;
+      text-decoration: underline;
+      font-size: 14px;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px 20px;
+      gap: 25px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 320px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(236,72,153,0.3);
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background-color: #f3f4f6;
+      border: 2px solid #fed7aa;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ec4899;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .product-card h3 {
+      font-size: 19px;
+      margin: 15px 0 10px;
+      color: #be185d;
+      font-weight: bold;
+    }
+    .rating {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+      color: #f59e0b;
+    }
+    .stars {
+      color: #fbbf24;
+      font-size: 16px;
+    }
+    .download-count {
+      background: linear-gradient(135deg,#f97316,#fb923c);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 8px 0;
+      display: inline-block;
+    }
+    .description {
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      min-height: 60px;
+    }
+    .description.short {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .description.expanded {
+      display: block;
+    }
+    .expand-text {
+      color: #ec4899;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .price {
+      font-weight: bold;
+      color: #16a34a;
+      font-size: 20px;
+      margin: 15px 0;
+    }
+    .price::before {
+      content: "$";
+    }
+    .instant-download {
+      background: linear-gradient(135deg,#8b5cf6,#7c3aed);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-top: 5px;
+      display: inline-block;
+    }
+    .shop-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: linear-gradient(135deg,#ec4899,#f97316);
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(236,72,153,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .shop-btn:hover {
+      background: linear-gradient(135deg,#db2777,#ea580c);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(236,72,153,0.6);
+    }
+    .shop-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+      transition: left 0.5s;
+    }
+    .shop-btn:hover::before {
+      left: 100%;
+    }
+    .no-products {
+      text-align: center;
+      padding: 50px;
+      font-size: 16px;
+      color: #4b5563;
+    }
+    /* ---- Floating emoji styles ---- */
+    .header-emoji-left {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.45rem;
+      font-size: 1.38rem;
+      opacity: 0.87;
+      animation: danceLeft 4s ease-in-out infinite;
+      flex-wrap: nowrap;
+      min-width: 340px; /* Ensure enough width for 10 emojis in one line */
+      pointer-events: none;
+    }
+    .header-emoji-right {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.45rem;
+      font-size: 1.38rem;
+      opacity: 0.87;
+      animation: danceRight 4s ease-in-out infinite;
+      animation-delay: 2s;
+      flex-wrap: nowrap;
+      min-width: 340px; /* Ensure enough width for 10 emojis in one line */
+      justify-content: flex-end;
+      pointer-events: none;
+    }
+    .header-emoji-left span, .header-emoji-right span {
+      display: inline-block;
+      animation: float 2s ease-in-out infinite;
+    }
+    .header-emoji-left span:nth-child(1) { animation-delay: 0.2s; }
+    .header-emoji-left span:nth-child(2) { animation-delay: 0.4s; }
+    .header-emoji-left span:nth-child(3) { animation-delay: 0.6s; }
+    .header-emoji-left span:nth-child(4) { animation-delay: 0.8s; }
+    .header-emoji-left span:nth-child(5) { animation-delay: 1.0s; }
+    .header-emoji-left span:nth-child(6) { animation-delay: 1.2s; }
+    .header-emoji-left span:nth-child(7) { animation-delay: 1.4s; }
+    .header-emoji-left span:nth-child(8) { animation-delay: 1.6s; }
+    .header-emoji-left span:nth-child(9) { animation-delay: 1.8s; }
+    .header-emoji-left span:nth-child(10) { animation-delay: 2.0s; }
+    .header-emoji-right span:nth-child(1) { animation-delay: 0.25s; }
+    .header-emoji-right span:nth-child(2) { animation-delay: 0.5s; }
+    .header-emoji-right span:nth-child(3) { animation-delay: 0.75s; }
+    .header-emoji-right span:nth-child(4) { animation-delay: 1.0s; }
+    .header-emoji-right span:nth-child(5) { animation-delay: 1.25s; }
+    .header-emoji-right span:nth-child(6) { animation-delay: 1.5s; }
+    .header-emoji-right span:nth-child(7) { animation-delay: 1.75s; }
+    .header-emoji-right span:nth-child(8) { animation-delay: 2.0s; }
+    .header-emoji-right span:nth-child(9) { animation-delay: 2.25s; }
+    .header-emoji-right span:nth-child(10) { animation-delay: 2.5s; }
+
+    @keyframes danceLeft {
+      0%, 100% { transform: translateY(-50%) rotate(-6deg); }
+      50% { transform: translateY(-55%) rotate(9deg); }
+    }
+    @keyframes danceRight {
+      0%, 100% { transform: translateY(-50%) rotate(8deg); }
+      50% { transform: translateY(-55%) rotate(-8deg); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.1); }
+    }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>🎮 Fun & Games</h1>
+    <div class="header-emoji-left">
+      <span>🎮</span>
+      <span>🎲</span>
+      <span>🎯</span>
+      <span>🃏</span>
+      <span>🎪</span>
+      <span>🕹️</span>
+      <span>🏆</span>
+      <span>🧩</span>
+      <span>🥳</span>
+      <span>🤹‍♂️</span>
+    </div>
+    <div class="header-emoji-right">
+      <span>🎳</span>
+      <span>🎻</span>
+      <span>🎢</span>
+      <span>🍿</span>
+      <span>📺</span>
+      <span>🎤</span>
+      <span>👾</span>
+      <span>🎆</span>
+      <span>🎨</span>
+      <span>🥁</span>
+    </div>
+    <h1>🎮🎨Fun & Games🎳🍿</h1>
     <p>Exciting games and entertainment products for endless fun and adventure</p>
     <a href="index.html">← Back to Home</a>
   </div>
@@ -79,9 +327,7 @@
       .then(data => {
         const container = document.getElementById("product-container");
         const noProducts = document.getElementById("no-products");
-        const products = data.filter(item =>
-          item.Category && item.Category.trim() === "Fun & Games"
-        );
+        const products = data.filter(item => item.Category && item.Category.trim() === "Fun & Games");
         if (products.length === 0) {
           noProducts.style.display = "block";
           return;
@@ -89,18 +335,15 @@
         products.forEach((p, i) => {
           const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
           if (!link) return;
-
           const fullDesc = p.Description || "";
           const shortDesc = truncate(fullDesc, 100);
           const card = document.createElement("div");
           card.className = "product-card";
-
           const img = document.createElement("img");
           img.src = p["Image URL"] || "";
           img.alt = p["Product Name"];
           img.onerror = () => { img.src = "https://via.placeholder.com/320x250/fde68a/be185d?text=Image+Coming+Soon"; };
           card.appendChild(img);
-
           card.innerHTML += `
             <div class="badge">${badge()}</div>
             <h3>${p["Product Name"]}</h3>
@@ -111,7 +354,6 @@
             <div class="instant-download">⚡ Instant Download</div>
           `;
           card.innerHTML += `<a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 🎮</a>`;
-
           if (fullDesc.length > 100) {
             const descElem = card.querySelector(`#desc-${i}`);
             descElem.addEventListener('mouseenter', () => {
@@ -123,7 +365,6 @@
               descElem.className = "description short";
             });
           }
-
           container.appendChild(card);
         });
       })
