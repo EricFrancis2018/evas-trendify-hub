@@ -4,146 +4,216 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Email Marketing – Eva's Trendify Hub</title>
-  <meta name="description" content="Powerful email marketing tools and templates to grow your audience and sales."/>
+  <meta name="description" content="Powerful email marketing tools and templates to grow your audience and sales"/>
+  <!-- Google Fonts – Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
-    window.dataLayer = window.dataLayer||[];
-    function gtag(){dataLayer.push(arguments);}
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: linear-gradient(135deg,#e0f2fe,#bae6fd); overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg,#fdf2f8,#fce7f3);
+      overflow-x: hidden;
+    }
     .header {
-      background: linear-gradient(135deg,#0ea5e9,#0284c7);
-      color: white;
+      /* Purple → pink gradient */
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #ffffff;
       text-align: center;
       padding: 20px;
-      box-shadow: 0 4px 15px rgba(14,165,233,0.3);
+      box-shadow: 0 4px 15px rgba(139,92,246,0.4);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .header::after {
+      content: "✉️📧📝📬📈📊📱🔔📥📤💻🌐";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(5);
+      opacity: 0.09;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .header h1 {
+      margin: 0 0 6px;
+      font-size: 30px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      user-select: none;
+    }
+    .header p {
+      margin: 0 auto 12px;
+      font-size: 16px;
+      color: #f0e7ff;
+      max-width: 700px;
+      font-weight: 400;
+      user-select: none;
+    }
+    .header a {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      margin: 0 auto;
+      user-select: none;
+    }
+    .header a:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px 20px;
+      gap: 25px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      width: 320px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(139,92,246,0.16);
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background-color: #f3e8ff;
+      border: 2px solid #ec4899;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ec4899;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .product-card h3 {
+      font-size: 19px;
+      margin: 15px 0 10px;
+      color: #7c3aed;
+      font-weight: 700;
+    }
+    .rating {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+      color: #fbbf24;
+    }
+    .stars {
+      font-size: 16px;
+    }
+    .description {
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      min-height: 60px;
+      font-weight: 400;
+    }
+    .description.short {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .expand-text {
+      color: #8b5cf6;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .price {
+      font-weight: 700;
+      color: #16a34a;
+      font-size: 20px;
+      margin: 15px 0;
+    }
+    .price::before {
+      content: "$";
+    }
+    .shop-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: linear-gradient(135deg,#8b5cf6,#ec4899);
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139,92,246,0.19);
       position: relative;
       overflow: hidden;
     }
-    .header h1 { margin: 0; font-size: 32px; }
-    .header p { margin: 5px 0 10px; font-size: 16px; }
-    .header a { color: #e0f7ff; text-decoration: underline; font-size: 14px; }
-
-    /* --- Floating emoji styles --- */
-    .header-emoji-left, .header-emoji-right {
+    .shop-btn:hover {
+      background: linear-gradient(135deg,#ec4899,#8b5cf6);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(139,92,246,0.25);
+    }
+    .shop-btn::before {
+      content: "";
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 0.45rem;
-      font-size: 1.38rem;
-      opacity: 0.87;
-      flex-wrap: nowrap;
-      min-width: 340px; /* ensures all 10 fit in 1 line */
-      pointer-events: none;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.26),transparent);
+      transition: left 0.5s;
     }
-    .header-emoji-left {
-      left: 12px;
-      animation: danceLeft 4s ease-in-out infinite;
+    .shop-btn:hover::before {
+      left: 100%;
     }
-    .header-emoji-right {
-      right: 12px;
-      animation: danceRight 4s ease-in-out infinite;
-      animation-delay: 2s;
-      justify-content: flex-end;
+    .no-products {
+      text-align: center;
+      padding: 50px;
+      font-size: 16px;
+      color: #6b7280;
+      font-weight: 400;
     }
-    .header-emoji-left span, .header-emoji-right span {
-      display: inline-block;
-      animation: float 2s ease-in-out infinite;
-    }
-    /* Stagger animation delays */
-    .header-emoji-left span:nth-child(1) { animation-delay: 0.2s; }
-    .header-emoji-left span:nth-child(2) { animation-delay: 0.4s; }
-    .header-emoji-left span:nth-child(3) { animation-delay: 0.6s; }
-    .header-emoji-left span:nth-child(4) { animation-delay: 0.8s; }
-    .header-emoji-left span:nth-child(5) { animation-delay: 1.0s; }
-    .header-emoji-left span:nth-child(6) { animation-delay: 1.2s; }
-    .header-emoji-left span:nth-child(7) { animation-delay: 1.4s; }
-    .header-emoji-left span:nth-child(8) { animation-delay: 1.6s; }
-    .header-emoji-left span:nth-child(9) { animation-delay: 1.8s; }
-    .header-emoji-left span:nth-child(10) { animation-delay: 2.0s; }
-
-    .header-emoji-right span:nth-child(1) { animation-delay: 0.25s; }
-    .header-emoji-right span:nth-child(2) { animation-delay: 0.5s; }
-    .header-emoji-right span:nth-child(3) { animation-delay: 0.75s; }
-    .header-emoji-right span:nth-child(4) { animation-delay: 1.0s; }
-    .header-emoji-right span:nth-child(5) { animation-delay: 1.25s; }
-    .header-emoji-right span:nth-child(6) { animation-delay: 1.5s; }
-    .header-emoji-right span:nth-child(7) { animation-delay: 1.75s; }
-    .header-emoji-right span:nth-child(8) { animation-delay: 2.0s; }
-    .header-emoji-right span:nth-child(9) { animation-delay: 2.25s; }
-    .header-emoji-right span:nth-child(10) { animation-delay: 2.5s; }
-
-    @keyframes danceLeft {
-      0%, 100% { transform: translateY(-50%) rotate(-6deg); }
-      50% { transform: translateY(-55%) rotate(9deg); }
-    }
-    @keyframes danceRight {
-      0%, 100% { transform: translateY(-50%) rotate(8deg); }
-      50% { transform: translateY(-55%) rotate(-8deg); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-8px) scale(1.1); }
-    }
-
-    /* Product grid styles (unchanged) */
-    .product-grid { display: flex; flex-wrap: wrap; justify-content: center; padding: 30px 20px; gap: 25px; }
-    .product-card {
-      background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      width: 320px; padding: 20px; text-align: center; position: relative; overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .product-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(14,165,233,0.3); }
-    .product-card img {
-      width: 100%; height: auto; object-fit: contain; border-radius: 8px; margin-bottom: 15px;
-      background-color: #f3f4f6; border: 2px solid #fed7aa; transition: transform 0.3s ease;
-    }
-    .product-card:hover img { transform: scale(1.05); }
-    .badge { position: absolute; top: 15px; right: 15px; background: #0ea5e9; color: white;
-      padding: 6px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; }
-    .product-card h3 { font-size: 19px; margin: 15px 0 10px; color: #075985; font-weight: bold; }
-    .rating { display: flex; justify-content: center; align-items: center; gap: 5px; margin: 10px 0; color: #f59e0b; }
-    .stars { color: #fbbf24; font-size: 16px; }
-    .download-count { background: linear-gradient(135deg,#0284c7,#0ea5e9); color: white; padding: 4px 8px;
-      border-radius: 12px; font-size: 11px; font-weight: bold; margin: 8px 0; display: inline-block; }
-    .description { font-size: 14px; color: #334155; line-height: 1.5; margin-bottom: 15px; min-height: 60px; }
-    .description.short { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
-    .description.expanded { display: block; }
-    .expand-text { color: #0ea5e9; font-size: 12px; cursor: pointer; margin-top: 5px; }
-    .price { font-weight: bold; color: #16a34a; font-size: 20px; margin: 15px 0; }
-    .price::before { content: "$"; }
-    .instant-download { background: linear-gradient(135deg,#8b5cf6,#7c3aed); color: white;
-      padding: 4px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; margin-top: 5px; display: inline-block; }
-    .shop-btn {
-      display: inline-block; margin-top: 15px; background: linear-gradient(135deg,#0ea5e9,#0284c7);
-      color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px;
-      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(14,165,233,0.4); position: relative; overflow: hidden;
-    }
-    .shop-btn:hover { background: linear-gradient(135deg,#0284c7,#0369a1);
-      transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 20px rgba(14,165,233,0.6); }
-    .shop-btn::before { content: ""; position: absolute; top: 0; left: -100%;
-      width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
-      transition: left 0.5s; }
-    .shop-btn:hover::before { left: 100%; }
-    .no-products { text-align: center; padding: 50px; font-size: 16px; color: #4b5563; }
   </style>
 </head>
 <body>
   <div class="header">
-    <div class="header-emoji-left">
-      <span>📧</span><span>✉️</span><span>📨</span><span>📩</span><span>📰</span>
-      <span>📬</span><span>📦</span><span>📊</span><span>🖋️</span><span>📱</span>
-    </div>
-    <div class="header-emoji-right">
-      <span>💌</span><span>📤</span><span>📥</span><span>🗂️</span><span>🖊️</span>
-      <span>🔔</span><span>📈</span><span>🧾</span><span>💻</span><span>🌐</span>
-    </div>
-    <h1>📧📬Email Marketing📱✉️</h1>
+    <h1>✉️💻 Email Marketing 📈📱</h1>
     <p>Powerful email marketing tools and templates to grow your audience and sales</p>
     <a href="index.html">← Back to Home</a>
   </div>
@@ -155,57 +225,85 @@
 
   <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
-    function truncate(text, max = 120) { return text.length <= max ? text : text.substr(0, max) + '...'; }
+
+    function truncate(text, max = 120) {
+      return text.length <= max ? text : text.substr(0, max) + '...';
+    }
+
     function badge() {
-      const b = ['📥 Campaign', '✉️ Template', '🚀 Automated', '📊 Analytics', '🤝 Segmented'];
+      const b = ['🚀 High Open','📈 Conversion','🔧 Customizable','🔥 Hot','✅ Reliable'];
       return b[Math.floor(Math.random() * b.length)];
     }
-    function rating() { const r = ['4.8', '4.9', '5.0', '4.7', '4.6']; return r[Math.floor(Math.random() * r.length)]; }
-    function downloads() { const d = ['1,500+', '1,000+', '2,200+', '1,700+', '1,200+']; return d[Math.floor(Math.random() * d.length)]; }
+
+    function rating() {
+      const r = ['4.8','4.9','5.0','4.7','4.6'];
+      return r[Math.floor(Math.random() * r.length)];
+    }
 
     fetch(SHEET_URL)
       .then(r => r.json())
       .then(data => {
         const container = document.getElementById("product-container");
         const noProducts = document.getElementById("no-products");
-        const products = data.filter(item => item.Category && item.Category.trim() === "Email Marketing");
-        if (products.length === 0) { noProducts.style.display = "block"; return; }
+
+        const products = data.filter(item => {
+          const raw = (item["Category"] ?? item["Category "] ?? "").trim().toLowerCase();
+          return raw === "email marketing";
+        });
+
+        if (!products.length) {
+          noProducts.style.display = "block";
+          return;
+        }
+
         products.forEach((p, i) => {
-          const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
+          const link = p["Product Link"] || p["Product Link "] || p["Product URL"];
           if (!link) return;
-          const fullDesc = p.Description || "";
-          const shortDesc = truncate(fullDesc, 100);
-          const card = document.createElement("div"); card.className = "product-card";
+
+          const full = p.Description || "";
+          const short = truncate(full, 100);
+
+          const card = document.createElement("div");
+          card.className = "product-card";
+
           const img = document.createElement("img");
           img.src = p["Image URL"] || "";
           img.alt = p["Product Name"];
-          img.onerror = () => { img.src = "https://via.placeholder.com/320x250/bae6fd/075985?text=Image+Coming+Soon"; };
+          img.onerror = () => {
+            img.src = "https://via.placeholder.com/320x250/eff6ff/8b5cf6?text=Image+Coming+Soon";
+          };
           card.appendChild(img);
+
           card.innerHTML += `
             <div class="badge">${badge()}</div>
             <h3>${p["Product Name"]}</h3>
             <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
-            <div class="download-count">📥 Downloaded ${downloads()} times</div>
-            <div class="description short" id="desc-${i}">${shortDesc}${fullDesc.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}</div>
+            <div class="description short" id="desc-${i}">
+              ${short}${full.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
+            </div>
             <div class="price">${p.Price || ""}</div>
-            <div class="instant-download">⚡ Instant Download</div>
+            <a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now ✉️</a>
           `;
-          card.innerHTML += `<a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 📧</a>`;
-          if (fullDesc.length > 100) {
-            const descElem = card.querySelector(`#desc-${i}`);
-            descElem.addEventListener('mouseenter', () => {
-              descElem.innerHTML = fullDesc + '<div class="expand-text">hover away to collapse</div>';
-              descElem.className = "description expanded";
+
+          if (full.length > 100) {
+            const descEl = card.querySelector(`#desc-${i}`);
+            descEl.addEventListener('mouseenter', () => {
+              descEl.innerHTML = full + '<div class="expand-text">hover away to collapse</div>';
+              descEl.className = "description expanded";
             });
-            descElem.addEventListener('mouseleave', () => {
-              descElem.innerHTML = shortDesc + '<div class="expand-text">• • • hover to read more</div>';
-              descElem.className = "description short";
+            descEl.addEventListener('mouseleave', () => {
+              descEl.innerHTML = short + '<div class="expand-text">• • • hover to read more</div>';
+              descEl.className = "description short";
             });
           }
+
           container.appendChild(card);
         });
       })
-      .catch(err => { console.error(err); document.getElementById("no-products").style.display = "block"; });
+      .catch(err => {
+        console.error(err);
+        document.getElementById("no-products").style.display = "block";
+      });
   </script>
 </body>
 </html>
