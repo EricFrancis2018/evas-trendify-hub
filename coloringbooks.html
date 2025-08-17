@@ -1,374 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Coloring Books - Eva's Trendify Hub</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-  overflow-x: hidden;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
-}
-.floating-pencil {
-  position: fixed;
-  font-size: 30px;
-  animation: float 3s ease-in-out infinite;
-  z-index: 1;
-  pointer-events: none;
-}
-.pencil-1 { top: 20%; left: 5%; animation-delay: 0s; }
-.pencil-2 { top: 60%; right: 8%; animation-delay: 1s; }
-.pencil-3 { top: 40%; left: 3%; animation-delay: 2s; }
-.header {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-  text-align: center;
-  padding: 20px;
-  position: relative;
-  box-shadow: 0 4px 15px rgba(245,158,11,0.3);
-  overflow: hidden;
-}
-.header h1 {
-  margin: 0;
-  font-size: 32px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-.header p {
-  margin: 5px 0 10px;
-  font-size: 16px;
-}
-.header a {
-  color: #fef3c7;
-  text-decoration: underline;
-  font-size: 14px;
-}
-/* Floating emojis beside the header title */
-.header-emoji-left,
-.header-emoji-right {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 0.5rem;
-  font-size: 1.8rem;
-  opacity: 0.8;
-  pointer-events: none;
-  flex-wrap: nowrap;
-  min-width: 340px; /* ensures all 10 emojis fit in one line */
-  animation: float 3s ease-in-out infinite;
-}
-.header-emoji-left { left: 12px; }
-.header-emoji-right { right: 12px; }
-
-.header-emoji-left span, .header-emoji-right span {
-  display: inline-block;
-  animation: float 3s ease-in-out infinite;
-}
-/* Staggered animation delays for left emojis */
-.header-emoji-left span:nth-child(1) { animation-delay: 0.0s; }
-.header-emoji-left span:nth-child(2) { animation-delay: 0.3s; }
-.header-emoji-left span:nth-child(3) { animation-delay: 0.6s; }
-.header-emoji-left span:nth-child(4) { animation-delay: 0.9s; }
-.header-emoji-left span:nth-child(5) { animation-delay: 1.2s; }
-.header-emoji-left span:nth-child(6) { animation-delay: 1.5s; }
-.header-emoji-left span:nth-child(7) { animation-delay: 1.8s; }
-.header-emoji-left span:nth-child(8) { animation-delay: 2.1s; }
-.header-emoji-left span:nth-child(9) { animation-delay: 2.4s; }
-.header-emoji-left span:nth-child(10) { animation-delay: 2.7s; }
-/* Staggered animation delays for right emojis */
-.header-emoji-right span:nth-child(1) { animation-delay: 0.15s; }
-.header-emoji-right span:nth-child(2) { animation-delay: 0.45s; }
-.header-emoji-right span:nth-child(3) { animation-delay: 0.75s; }
-.header-emoji-right span:nth-child(4) { animation-delay: 1.05s; }
-.header-emoji-right span:nth-child(5) { animation-delay: 1.35s; }
-.header-emoji-right span:nth-child(6) { animation-delay: 1.65s; }
-.header-emoji-right span:nth-child(7) { animation-delay: 1.95s; }
-.header-emoji-right span:nth-child(8) { animation-delay: 2.25s; }
-.header-emoji-right span:nth-child(9) { animation-delay: 2.55s; }
-.header-emoji-right span:nth-child(10) { animation-delay: 2.85s; }
-
-@keyframes float {
-  0%,100% { transform: translateY(-50%) translateX(0); }
-  50% { transform: translateY(-60%) translateX(5px); }
-}
-
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 30px 20px;
-  gap: 25px;
-  position: relative;
-  z-index: 2;
-}
-.product-card {
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  width: 320px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  border: 3px solid transparent;
-}
-.product-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(245,158,11,0.3);
-  border-color: #fbbf24;
-}
-.product-card:hover::before {
-  content: "✨";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  animation: float 1s infinite;
-}
-.product-card:hover::after {
-  content: "🌟";
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 18px;
-  animation: float 1s infinite 0.5s;
-}
-.product-card img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  background-color: #f3f4f6;
-  border: 2px solid #fed7aa;
-  transition: transform 0.3s ease;
-}
-.product-card:hover img {
-  transform: scale(1.05);
-  border-color: #fbbf24;
-}
-/* Fallback image replaced: no dog, just a drawing SVG */
-.product-card img[src=""], .product-card img:not([src]) {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="%23f3f4f6"/><text x="100" y="115" text-anchor="middle" fill="%236b7280" font-family="Arial" font-size="32">🎨</text></svg>');
-  background-size: cover;
-  background-position: center;
-}
-.badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 15px;
-  font-size: 15px;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(245,158,11,0.4);
-}
-.download-count {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  display: inline-block;
-}
-.product-card h3 {
-  font-size: 19px;
-  margin: 8px 0 10px;
-  color: #1f2937;
-  font-weight: bold;
-}
-.description {
-  font-size: 14px;
-  color: #6b7280;
-  line-height: 1.5;
-  margin-bottom: 15px;
-  min-height: 60px;
-}
-.description.short {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  cursor: pointer;
-}
-.description.expanded {
-  display: block;
-}
-.expand-text {
-  color: #f59e0b;
-  font-size: 12px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-.price {
-  font-weight: bold;
-  color: #059669;
-  font-size: 20px;
-  margin: 15px 0;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-}
-.price::before {
-  content: "$";
-  color: #059669;
-}
-.shop-btn {
-  display: inline-block;
-  margin-top: 15px;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-  padding: 14px 28px;
-  text-decoration: none;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245,158,11,0.4);
-  position: relative;
-  overflow: hidden;
-}
-.shop-btn:hover {
-  background: linear-gradient(135deg, #d97706, #92400e);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(245,158,11,0.6);
-}
-.shop-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: left 0.5s;
-}
-.shop-btn:hover::before {
-  left: 100%;
-}
-.no-products {
-  text-align: center;
-  padding: 50px;
-  font-size: 16px;
-  color: #6b7280;
-}
-@media(max-width:600px){
-  .product-grid {
-    padding: 20px;
-    gap: 15px;
-  }
-  .product-card {
-    width: 90vw;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coloring Books – Eva's Trendify Hub</title>
+  <meta name="description" content="Creative and relaxing digital coloring books for all ages"/>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <style>
+    body {
+      font-family: Poppins ;
+      margin: 0;
+      background: linear-gradient(135deg,#fdf2f8,#fce7f3);
+      overflow-x: hidden;
+    }
+    .header {
+      /* Vibrant orange two-color gradient for Coloring Books */
+      background: linear-gradient(135deg, #F59E42, #FBBF24);
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(251,191,36,0.4);
+      position: relative;
+      overflow: hidden;
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 4px solid #F59E42;
+      border-bottom: 4px solid #F59E42;
+    }
+    /* Decorative watermark icons behind header text */
+    .header::after {
+      content: "🎨✏️✂️🖍️📚🧩📒🌈📝🖌️🎨✏️";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(5);
+      opacity: 0.07;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: bold;
+      color: #2D1B14; /* Dark brown text */
+      user-select: none;
+    }
+    .header p {
+      margin: 8px 0 20px;
+      font-size: 16px;
+      color: #3E2723; /* Dark brown text */
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      user-select: none;
+    }
+    /* Pill-shaped Back to Home button */
+    .header a {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #2D1B14; /* Dark brown text */
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      max-width: fit-content;
+      margin: 0 auto;
+      user-select: none;
+    }
+    .header a:hover {
+      background: rgba(255, 255, 255, 0.45);
+    }
+    .product-grid {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      padding: 30px 20px; gap: 25px;
+    }
+    .product-card {
+      background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      width: 320px; padding: 20px; text-align: center; position: relative; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(251,191,36,0.16);
+    }
+    .product-card img {
+      width: 100%; height: auto; object-fit: contain; border-radius: 8px; margin-bottom: 15px;
+      background-color: #FFFBEA; border: 2px solid #FBBF24; transition: transform 0.3s ease;
+    }
+    .product-card:hover img { transform: scale(1.05); }
+    .badge {
+      position: absolute; top: 15px; right: 15px; background: #F59E42; color: white;
+      padding: 6px 12px; border-radius: 15px; font-size: 11px; font-weight: bold;
+    }
+    .product-card h3 {
+      font-size: 19px; margin: 15px 0 10px; color: #F59E42; font-weight: bold;
+    }
+    .rating {
+      display: flex; justify-content: center; align-items: center; gap: 5px;
+      margin: 10px 0; color: #FBBF24;
+    }
+    .stars { font-size: 16px; }
+    .description {
+      font-size: 14px; color: #91672C; line-height: 1.5; margin-bottom: 15px; min-height: 60px;
+    }
+    .description.short {
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; cursor: pointer;
+    }
+    .description.expanded { display: block; }
+    .expand-text {
+      color: #F59E42; font-size: 12px; cursor: pointer; margin-top: 5px;
+    }
+    .price {
+      font-weight: bold; color: #10b981; font-size: 20px; margin: 15px 0;
+    }
+    .price::before { content: "$"; }
+    .shop-btn {
+      display: inline-block; margin-top: 15px;
+      background: linear-gradient(135deg,#F59E42,#FBBF24);
+      color: white; padding: 14px 28px; text-decoration: none;
+      border-radius: 30px; font-weight: bold; font-size: 16px;
+      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(251,191,36,0.19);
+      position: relative; overflow: hidden;
+    }
+    .shop-btn:hover {
+      background: linear-gradient(135deg,#FBBF24,#F59E42);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(251,191,36,0.25);
+    }
+    .shop-btn::before {
+      content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.26),transparent);
+      transition: left 0.5s;
+    }
+    .shop-btn:hover::before { left: 100%; }
+    .no-products {
+      text-align: center; padding: 50px; font-size: 16px; color: #A98A50;
+    }
+  </style>
 </head>
 <body>
-<!-- FLOATING PENCILS -->
-<div class="floating-pencil pencil-1">✏️</div>
-<div class="floating-pencil pencil-2">🖍️</div>
-<div class="floating-pencil pencil-3">🖊️</div>
-<div class="header">
-  <div class="header-emoji-left">
-    <span>🎨</span><span>🖍️</span><span>✂️</span><span>🖌️</span><span>🖊️</span>
-    <span>🖼️</span><span>📚</span><span>📖</span><span>🧩</span><span>📝</span>
+  <div class="header">
+    <h1>🎨 Coloring Books 🌈</h1>
+    <p>Creative and relaxing digital coloring books for all ages</p>
+    <a href="index.html">← Back to Home</a>
   </div>
-  <div class="header-emoji-right">
-    <span>🎨</span><span>🖌️</span><span>🖍️</span><span>🖊️</span><span>🖼️</span>
-    <span>📚</span><span>📖</span><span>🧩</span><span>📝</span><span>✏️</span>
+  <div id="product-container" class="product-grid"></div>
+  <div id="no-products" class="no-products" style="display:none;">
+    No products found in Coloring Books category.
   </div>
-  <h1>🎨 Coloring Books 🌈</h1>
-  <p>Creative and relaxing digital coloring books for all ages</p>
-  <a href="index.html">← Back to Home</a>
-</div>
-<div id="product-container" class="product-grid"></div>
-<div id="no-products" class="no-products" style="display:none;">
-  No products found in Coloring Books category.
-</div>
-<script>
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
-let allColoringBooks = [];
-function truncateText(text, maxLength = 120) {
-  return text.length <= maxLength ? text : text.substr(0, maxLength) + '...';
-}
-function getRandomBadge() {
-  return '🎨 Coloring Book'; // Palette emoji always shown
-}
-function getRandomDownloads(){
-  const downloads = ['1,200+', '850+', '2,100+', '670+', '1,500+', '920+'];
-  return downloads[Math.floor(Math.random() * downloads.length)];
-}
-fetch(SHEET_URL)
-.then(response => response.json())
-.then(data => {
-  const container = document.getElementById("product-container");
-  const noProducts = document.getElementById("no-products");
-  allColoringBooks = data.filter(item => {
-    if (!item.Category) return false;
-    const category = item.Category.trim().toLowerCase();
-    return category.includes("coloring") || category === "coloringbooks";
-  });
-  displayProducts(allColoringBooks);
-})
-.catch(error => {
-  const noProducts = document.getElementById("no-products");
-  noProducts.style.display = "block";
-  noProducts.textContent = "Error loading products. Please try again later.";
-});
-function displayProducts(products) {
-  const container = document.getElementById("product-container");
-  const noProducts = document.getElementById("no-products");
-  container.innerHTML = '';
-  if (products.length === 0) {
-    noProducts.style.display = "block";
-    return;
-  }
-  noProducts.style.display = "none";
-  products.forEach((product, index) => {
-    const productLink = product["Product Link "] || product["Product Link"];
-    if (!productLink || productLink.trim() === "") return;
-    const fullDescription = product.Description || "";
-    const shortDescription = truncateText(fullDescription, 100);
-    const badge = getRandomBadge();
-    const downloads = getRandomDownloads();
-    const card = document.createElement("div");
-    card.className = "product-card";
-    card.innerHTML = `
-      <div class="badge">${badge}</div>
-      <img src="${product["Image URL"] || ''}" alt="${product["Product Name"]}" 
-        onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 200 200&quot;><circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;80&quot; fill=&quot;%23f3f4f6&quot;/><text x=&quot;100&quot; y=&quot;115&quot; text-anchor=&quot;middle&quot; fill=&quot;%236b7280&quot; font-family=&quot;Arial&quot; font-size=&quot;32&quot;>🎨</text></svg>';">
-      <div class="download-count">📥 Downloaded ${downloads} times</div>
-      <h3>${product["Product Name"]}</h3>
-      <div class="description short" id="desc-${index}">
-        ${shortDescription}
-        ${fullDescription.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
-      </div>
-      <div class="price">${product.Price || ''}</div>
-      <a href="${productLink}" target="_blank" rel="noopener noreferrer" class="shop-btn">Buy Now 🎨</a>
-    `;
-    if (fullDescription.length > 100) {
-      const descElement = card.querySelector(`#desc-${index}`);
-      descElement.addEventListener('mouseenter', () => {
-        descElement.innerHTML = fullDescription + '<div class="expand-text">hover away to collapse</div>';
-        descElement.className = "description expanded";
-      });
-      descElement.addEventListener('mouseleave', () => {
-        descElement.innerHTML = shortDescription + '<div class="expand-text">• • • hover to read more</div>';
-        descElement.className = "description short";
-      });
+  <script>
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
+    function truncate(text, max = 120) {
+      return text.length <= max ? text : text.substr(0, max) + '...';
     }
-    container.appendChild(card);
-  });
-}
-</script>
+    function badge() {
+      const b = ['🎨 Relaxing','🖌️ Creative','🌈 Bright','🔥 Bestseller','✏️ Fun'];
+      return b[Math.floor(Math.random() * b.length)];
+    }
+    function rating() {
+      const r = ['4.8','4.9','5.0','4.7','4.6'];
+      return r[Math.floor(Math.random() * r.length)];
+    }
+    fetch(SHEET_URL)
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById("product-container");
+        const noProducts = document.getElementById("no-products");
+        const products = data.filter(item =>
+          item.Category && item.Category.trim() === "Coloring Books"
+        );
+        if (!products.length) {
+          noProducts.style.display = "block";
+          return;
+        }
+        products.forEach((p, i) => {
+          const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
+          if (!link) return;
+          const full = p.Description || "";
+          const short = truncate(full, 100);
+          const card = document.createElement("div");
+          card.className = "product-card";
+          const img = document.createElement("img");
+          img.src = p["Image URL"] || "";
+          img.alt = p["Product Name"];
+          img.onerror = () => {
+            img.src = "https://via.placeholder.com/320x250/FFF8E1/F59E42?text=Image+Coming+Soon";
+          };
+          card.appendChild(img);
+          card.innerHTML += `
+            <div class="badge">${badge()}</div>
+            <h3>${p["Product Name"]}</h3>
+            <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
+            <div class="description short" id="desc-${i}">
+              ${short}${full.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
+            </div>
+            <div class="price">${p.Price || ""}</div>
+            <a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 🎨</a>
+          `;
+          if (full.length > 100) {
+            const descEl = card.querySelector(`#desc-${i}`);
+            descEl.addEventListener('mouseenter', () => {
+              descEl.innerHTML = full + '<div class="expand-text">hover away to collapse</div>';
+              descEl.className = "description expanded";
+            });
+            descEl.addEventListener('mouseleave', () => {
+              descEl.innerHTML = short + '<div class="expand-text">• • • hover to read more</div>';
+              descEl.className = "description short";
+            });
+          }
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("no-products").style.display = "block";
+      });
+  </script>
 </body>
 </html>
