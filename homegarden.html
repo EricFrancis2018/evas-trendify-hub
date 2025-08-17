@@ -2,215 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home & Garden - Eva's Trendify Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home & Garden – Eva's Trendify Hub</title>
+  <meta name="description" content="Curated affiliate picks for your living space and garden"/>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Poppins, sans-serif;
       margin: 0;
-      background-color: #f4f4f4;
+      background: linear-gradient(135deg,#fdf2f8,#fce7f3);
+      overflow-x: hidden;
     }
     .header {
-      background-color: #15803d;
-      color: white;
+      /* Two-color vibrant green gradient header background */
+      background: linear-gradient(135deg, #22c55e, #10b981);
+      color: #FAF9F6;
       text-align: center;
       padding: 20px;
+      box-shadow: 0 4px 15px rgba(34,197,94,0.5);
       position: relative;
       overflow: hidden;
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 4px solid #16a34a;
+      border-bottom: 4px solid #16a34a;
+    }
+    /* Decorative watermark icons behind header text */
+    .header::after {
+      content: "🏡🐛🌿🍂🌷🌻🐌🌼🍁🕷️🏠🦋";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(5);
+      opacity: 0.09;
+      pointer-events: none;
+      white-space: nowrap;
     }
     .header h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #FAF9F6;
+      user-select: none;
     }
     .header p {
-      margin: 5px 0 10px;
-      font-size: 14px;
+      margin: 8px 0 20px;
+      font-size: 16px;
+      color: #D1F0E0;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      user-select: none;
     }
+    /* Pill-shaped Back to Home button */
     .header a {
-      color: #bbf7d0;
-      text-decoration: underline;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #FAF9F6;
       font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      max-width: fit-content;
+      margin: 0 auto;
+      user-select: none;
+    }
+    .header a:hover {
+      background: rgba(255, 255, 255, 0.45);
     }
     .product-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px 20px;
-      gap: 25px;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      padding: 30px 20px; gap: 25px;
     }
     .product-card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      width: 320px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
+      background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 320px; padding: 20px; text-align: center; position: relative; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .product-card:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 35px rgba(34,197,94,0.3);
     }
     .product-card img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      background-color: #f3f4f6;
-      border: 2px solid #fed7aa;
-      transition: transform 0.3s ease;
+      width: 100%; height: auto; object-fit: contain; border-radius: 8px; margin-bottom: 15px;
+      background-color: #f3f4f6; border: 2px solid #bbf7d0; transition: transform 0.3s ease;
     }
-    .product-card:hover img {
-      transform: scale(1.05);
-      border-color: #15803d;
-    }
+    .product-card:hover img { transform: scale(1.05); }
     .badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background-color: #059669;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: bold;
+      position: absolute; top: 15px; right: 15px; background: #22c55e; color: white;
+      padding: 6px 12px; border-radius: 15px; font-size: 11px; font-weight: bold;
     }
     .product-card h3 {
-      font-size: 19px;
-      margin: 15px 0;
-      color: #1f2937;
-      font-weight: bold;
+      font-size: 19px; margin: 15px 0 10px; color: #047857; font-weight: bold;
     }
+    .rating {
+      display: flex; justify-content: center; align-items: center; gap: 5px;
+      margin: 10px 0; color: #f59e0b;
+    }
+    .stars { font-size: 16px; }
     .description {
-      font-size: 14px;
-      color: #6b7280;
-      line-height: 1.5;
-      margin-bottom: 15px;
-      min-height: 60px;
+      font-size: 14px; color: #4b5563; line-height: 1.5; margin-bottom: 15px; min-height: 60px;
     }
     .description.short {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      cursor: pointer;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; cursor: pointer;
     }
-    .description.expanded {
-      display: block;
-    }
+    .description.expanded { display: block; }
     .expand-text {
-      color: #15803d;
-      font-size: 12px;
-      cursor: pointer;
-      margin-top: 5px;
+      color: #22c55e; font-size: 12px; cursor: pointer; margin-top: 5px;
     }
     .price {
-      font-weight: bold;
-      color: #059669;
-      font-size: 18px;
-      margin: 15px 0;
+      font-weight: bold; color: #16a34a; font-size: 20px; margin: 15px 0;
     }
+    .price::before { content: "$"; }
     .shop-btn {
-      display: inline-block;
-      margin-top: 15px;
-      background: linear-gradient(135deg, #15803d, #059669);
-      color: white;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 25px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(21, 128, 61, 0.3);
+      display: inline-block; margin-top: 15px;
+      background: linear-gradient(135deg,#22c55e,#16a34a);
+      color: white; padding: 14px 28px; text-decoration: none;
+      border-radius: 30px; font-weight: bold; font-size: 16px;
+      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(34,197,94,0.4);
+      position: relative; overflow: hidden;
     }
     .shop-btn:hover {
-      background: linear-gradient(135deg, #166534, #047857);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(21, 128, 61, 0.4);
+      background: linear-gradient(135deg,#16a34a,#22c55e);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(34,197,94,0.6);
     }
+    .shop-btn::before {
+      content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+      transition: left 0.5s;
+    }
+    .shop-btn:hover::before { left: 100%; }
     .no-products {
-      text-align: center;
-      padding: 50px;
-      font-size: 16px;
-      color: #6b7280;
-    }
-    /* ---- Emoji floating decorations ---- */
-    .header-emoji-left {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 0.7rem;
-      font-size: 1.7rem;
-      opacity: 0.85;
-      animation: danceLeft 4s ease-in-out infinite;
-    }
-    .header-emoji-right {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 0.7rem;
-      font-size: 1.7rem;
-      opacity: 0.85;
-      animation: danceRight 4s ease-in-out infinite;
-      animation-delay: 2s;
-    }
-    .header-emoji-left span, .header-emoji-right span {
-      display: inline-block;
-      animation: float 2s ease-in-out infinite;
-    }
-    .header-emoji-left span:nth-child(2) { animation-delay: 0.5s; }
-    .header-emoji-left span:nth-child(3) { animation-delay: 1s; }
-    .header-emoji-left span:nth-child(4) { animation-delay: 1.3s; }
-    .header-emoji-right span:nth-child(2) { animation-delay: 0.6s; }
-    .header-emoji-right span:nth-child(3) { animation-delay: 1.2s; }
-    .header-emoji-right span:nth-child(4) { animation-delay: 1.6s; }
-    @keyframes danceLeft {
-      0%, 100% { transform: translateY(-50%) rotate(-6deg);}
-      50% { transform: translateY(-55%) rotate(7deg);}
-    }
-    @keyframes danceRight {
-      0%, 100% { transform: translateY(-50%) rotate(7deg);}
-      50% { transform: translateY(-55%) rotate(-6deg);}
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) scale(1);}
-      50% { transform: translateY(-8px) scale(1.12);}
+      text-align: center; padding: 50px; font-size: 16px; color: #4B5563;
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <div class="header-emoji-left">
-      <span>🏡</span>
-      <span>🐛</span>
-      <span>🌿</span>
-      <span>🛋️</span>
-      <span>🌲</span>
-<span>🌼</span>
-<span>🌳</span>
-<span>🍃</span>
-<span>🍂</span>
-<span>🌹</span>
-    </div>
-    <div class="header-emoji-right">
-      <span>🌿</span>
-<span>🍁</span>
-<span>🕷️</span>
-<span>🏘️</span>
-<span>💐</span>
-<span>🌻</span>
-      <span>🐌</span>
-      <span>🌼</span>
-      <span>🍃</span>
-      <span>🐜</span>
-    </div>
-    <h1>🏘️🍃Home & Garden🌼🌻</h1>
-    <p>Curated affiliate picks for your living space and garden 🌿</p>
+    <h1>🏡 Home & Garden 🌼🌻</h1>
+    <p>Curated affiliate picks for your living space and garden 🍃</p>
     <a href="index.html">← Back to Home</a>
   </div>
 
@@ -221,63 +164,72 @@
 
   <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
-    function truncateText(text, maxLength = 120) {
-      if (text.length <= maxLength) return text;
-      return text.substr(0, maxLength) + '...';
+
+    function truncate(text, max = 120) {
+      return text.length <= max ? text : text.substr(0, max) + '...';
     }
-    function getRandomBadge() {
-      const badges = ['🌱 Eco-Friendly', '🏡 Home Essential', '🌟 Top Rated', '🔥 Popular', '💚 Best Choice'];
-      return badges[Math.floor(Math.random() * badges.length)];
+    function badge() {
+      const b = ['🌿 Fresh','🏡 Cozy','🌻 Blooming','🛠️ Functional','🧹 Clean'];
+      return b[Math.floor(Math.random() * b.length)];
     }
+    function rating() {
+      const r = ['4.8','4.9','5.0','4.7','4.6'];
+      return r[Math.floor(Math.random() * r.length)];
+    }
+
     fetch(SHEET_URL)
-      .then(response => response.json())
+      .then(r => r.json())
       .then(data => {
         const container = document.getElementById("product-container");
         const noProducts = document.getElementById("no-products");
-        const homeGarden = data.filter(item => item.Category && item.Category.trim() === "Home & Garden");
-        if (homeGarden.length === 0) {
+        const products = data.filter(item =>
+          item.Category && item.Category.trim() === "Home & Garden"
+        );
+        if (!products.length) {
           noProducts.style.display = "block";
-        } else {
-          noProducts.style.display = "none";
-          homeGarden.forEach((product, index) => {
-            const productLink = product["Product Link "] || product["Product Link"];
-            if (!productLink || productLink.trim() === "") return;
-            const fullDescription = product.Description || "";
-            const shortDescription = truncateText(fullDescription, 100);
-            const badge = getRandomBadge();
-            const card = document.createElement("div");
-            card.className = "product-card";
-            card.innerHTML = `
-              <div class="badge">${badge}</div>
-              <img src="${product["Image URL"]}" alt="${product["Product Name"]}">
-              <h3>${product["Product Name"]}</h3>
-              <div class="description short" id="desc-${index}">
-                ${shortDescription}
-                ${fullDescription.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
-              </div>
-              <div class="price">${product.Price || ""}</div>
-              <a href="${productLink}" target="_blank" rel="noopener noreferrer" class="shop-btn">Shop Now 🏡</a>
-            `;
-            if (fullDescription.length > 100) {
-              const descElement = card.querySelector(`#desc-${index}`);
-              descElement.addEventListener('mouseenter', () => {
-                descElement.innerHTML = fullDescription + '<div class="expand-text">hover away to collapse</div>';
-                descElement.className = "description expanded";
-              });
-              descElement.addEventListener('mouseleave', () => {
-                descElement.innerHTML = shortDescription + '<div class="expand-text">• • • hover to read more</div>';
-                descElement.className = "description short";
-              });
-            }
-            container.appendChild(card);
-          });
+          return;
         }
+        products.forEach((p, i) => {
+          const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
+          if (!link) return;
+          const full = p.Description || "";
+          const short = truncate(full, 100);
+          const card = document.createElement("div");
+          card.className = "product-card";
+          const img = document.createElement("img");
+          img.src = p["Image URL"] || "";
+          img.alt = p["Product Name"];
+          img.onerror = () => {
+            img.src = "https://via.placeholder.com/320x250/fce7f3/be185d?text=Image+Coming+Soon";
+          };
+          card.appendChild(img);
+          card.innerHTML += `
+            <div class="badge">${badge()}</div>
+            <h3>${p["Product Name"]}</h3>
+            <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
+            <div class="description short" id="desc-${i}">
+              ${short}${full.length > 100 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
+            </div>
+            <div class="price">${p.Price || ""}</div>
+            <a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 🏡</a>
+          `;
+          if (full.length > 100) {
+            const descEl = card.querySelector(`#desc-${i}`);
+            descEl.addEventListener('mouseenter', () => {
+              descEl.innerHTML = full + '<div class="expand-text">hover away to collapse</div>';
+              descEl.className = "description expanded";
+            });
+            descEl.addEventListener('mouseleave', () => {
+              descEl.innerHTML = short + '<div class="expand-text">• • • hover to read more</div>';
+              descEl.className = "description short";
+            });
+          }
+          container.appendChild(card);
+        });
       })
-      .catch(error => {
-        console.error("Error loading products:", error);
-        const noProducts = document.getElementById("no-products");
-        noProducts.style.display = "block";
-        noProducts.textContent = "Error loading products. Please try again later.";
+      .catch(err => {
+        console.error(err);
+        document.getElementById("no-products").style.display = "block";
       });
   </script>
 </body>
