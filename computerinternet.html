@@ -29,7 +29,7 @@
     .expand-text { color:#3b82f6; font-size:12px; cursor:pointer; margin-top:5px; font-weight:500; }
     .price { font-weight:700; color:#16a34a; font-size:20px; margin:15px 0; }
     .price::before { content:"$"; }
-    .shop-btn { display:inline-block; margin-top:15px; background:linear-gradient(135deg,#3b82f6,#6366f1); color:#fff; padding:14px 28px; border-radius:30px; font-weight:600; font-size:16px; transition:all .3s; box-shadow:0 4px 15px rgba(59,130,246,0.19); position:relative; overflow:hidden; }
+    .shop-btn { display:inline-block; margin-top:15px; background:linear-gradient(135deg,#3b82f6,#6366f1); color:#fff; padding:14px 28px; border-radius:30px; font-weight:600; font-size:16px; transition:all .3s; box-shadow:0 4px 15px rgba(59,130,246,0.19); position:relative; overflow:hidden; text-decoration:none; }
     .shop-btn:hover { background:linear-gradient(135deg,#6366f1,#3b82f6); transform:translateY(-3px) scale(1.05); box-shadow:0 6px 20px rgba(59,130,246,0.25); }
     .shop-btn::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.26),transparent); transition:left .5s; }
     .shop-btn:hover::before { left:100%; }
@@ -42,10 +42,12 @@
     <p>Essential digital solutions and online products for modern life</p>
     <a href="index.html">← Back to Home</a>
   </div>
-  <div id="product-container" class="product-grid"></div>
+  <div id="product-container" class="product-grid">
+    <div class="loading">Loading…</div>
+  </div>
   <div id="no-products" class="no-products" style="display:none;">No products found in Computer & Internet category.</div>
 
-  <script defer>	
+  <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbwE9NmFhq-jQg7XtWXDOk46HG1JkjZsJrmpgpOBwkqnilI87TebvzluT2Q35_bggKs/exec";
     const CATEGORY = "Computer & Internet";
 
@@ -61,58 +63,70 @@
       return r[Math.floor(Math.random() * r.length)];
     }
 
-    document.getElementById("product-container").innerHTML = '<div class="loading">Loading…</div>';
-
-    fetch(`${SHEET_URL}?category=${encodeURIComponent(CATEGORY)}`)
-      .then(r => r.json())
-      .then(data => {
-        const container = document.getElementById("product-container");
-        container.innerHTML = '';
-        if (!data.length) {
-          document.getElementById("no-products").style.display = "block";
-          return;
-        }
-        data.forEach((p, i) => {
-          const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
-          const full = p.Description || "";
-          const short = truncate(full, 100);
-          const card = document.createElement("div");
-          card.className = "product-card";
-          const img = document.createElement("img");
-          img.src = p["Image URL"] || "";
-          img.alt = p["Product Name"];
-          img.onerror = () => {
-            img.src = "https://via.placeholder.com/320x250/eff6ff/3b82f6?text=Image+Coming+Soon";
-          };
-          card.appendChild(img);
-          card.innerHTML += `
-            <div class="badge">${badge()}</div>
-            <h3>${p["Product Name"]}</h3>
-            <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
-            <div class="description short" id="desc-${i}">
-              ${short}${full.length > 100 ? '<div class="expand-text">…hover to read more</div>' : ''}
-            </div>
-            <div class="price">${p.Price || ""}</div>
-            <a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 🖥️</a>
-          `;
-          if (full.length > 100) {
-            const descEl = card.querySelector(`#desc-${i}`);
-            descEl.addEventListener('mouseenter', () => {
-              descEl.innerHTML = full + '<div class="expand-text">hover away to collapse</div>';
-              descEl.className = "description expanded";
-            });
-            descEl.addEventListener('mouseleave', () => {
-              descEl.innerHTML = short + '<div class="expand-text">…hover to read more</div>';
-              descEl.className = "description short";
-            });
-          }
-          container.appendChild(card);
-        });
-      })
-      .catch(err => {
-        console.error(err);
+    // JSONP callback function
+    function handleProductData(data) {
+      const container = document.getElementById("product-container");
+      container.innerHTML = '';
+      
+      if (!data.length) {
         document.getElementById("no-products").style.display = "block";
+        return;
+      }
+
+      data.forEach((p, i) => {
+        const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
+        if (!link) return;
+        
+        const full = p.Description || "";
+        const short = truncate(full, 100);
+        const card = document.createElement("div");
+        card.className = "product-card";
+        
+        const img = document.createElement("img");
+        img.src = p["Image URL"] || "";
+        img.alt = p["Product Name"];
+        img.onerror = () => {
+          img.src = "https://via.placeholder.com/320x250/eff6ff/3b82f6?text=Image+Coming+Soon";
+        };
+        card.appendChild(img);
+        
+        card.innerHTML += `
+          <div class="badge">${badge()}</div>
+          <h3>${p["Product Name"]}</h3>
+          <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
+          <div class="description short" id="desc-${i}">
+            ${short}${full.length > 100 ? '<div class="expand-text">…hover to read more</div>' : ''}
+          </div>
+          <div class="price">${p.Price || ""}</div>
+          <a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 🖥️</a>
+        `;
+        
+        if (full.length > 100) {
+          const descEl = card.querySelector(`#desc-${i}`);
+          descEl.addEventListener('mouseenter', () => {
+            descEl.innerHTML = full + '<div class="expand-text">hover away to collapse</div>';
+            descEl.className = "description expanded";
+          });
+          descEl.addEventListener('mouseleave', () => {
+            descEl.innerHTML = short + '<div class="expand-text">…hover to read more</div>';
+            descEl.className = "description short";
+          });
+        }
+        
+        container.appendChild(card);
       });
+    }
+
+    // Load data using JSONP
+    const callbackName = 'handleProductData';
+    const url = `${SHEET_URL}?category=${encodeURIComponent(CATEGORY)}&callback=${callbackName}`;
+    const script = document.createElement('script');
+    script.src = url;
+    script.onerror = () => {
+      document.getElementById("product-container").innerHTML = '';
+      document.getElementById("no-products").style.display = "block";
+    };
+    document.head.appendChild(script);
   </script>
 </body>
 </html>
