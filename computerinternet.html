@@ -3,144 +3,290 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💻🌐 Computer & Internet ⚡🔒</title>
+  <title>Computer & Internet – Eva's Trendify Hub</title>
+  <meta name="description" content="Top trending computer & internet digital products and online solutions"/>
+  <!-- Preconnect to speed up Google Sheets fetch -->
+  <link rel="preconnect" href="https://script.google.com">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Poppins, sans-serif;
       margin: 0;
-      background-color: #f4f4f4;
+      background: linear-gradient(135deg, #dbeafe, #bae6fd);
+      overflow-x: hidden;
     }
-
     .header {
-      background-color: #1b3b27;
-      color: white;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
       text-align: center;
       padding: 20px;
+      box-shadow: 0 4px 15px rgba(59,130,246,0.6);
+      border-top: 4px solid #2563eb;
+      border-bottom: 4px solid #2563eb;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 130px;
     }
-
     .header h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 30px;
+      font-weight: 700;
+      user-select: none;
     }
-
     .header p {
-      margin: 5px 0 10px;
-      font-size: 14px;
+      margin: 8px 0 20px;
+      font-size: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #e0e7ff;
+      user-select: none;
     }
-
     .header a {
-      color: #d4ffdf;
-      text-decoration: underline;
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
       font-size: 14px;
+      transition: background 0.3s ease;
+      user-select: none;
+      margin: 0 auto;
     }
-
+    .header a:hover {
+      background: rgba(255,255,255,0.45);
+    }
     .product-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 20px;
+      gap: 25px;
+      padding: 30px 20px;
     }
-
     .product-card {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      width: 280px;
-      margin: 15px;
-      padding: 15px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.15);
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-height: 500px;
     }
-
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(59,130,246,0.3);
+      cursor: pointer;
+    }
     .product-card img {
       width: 100%;
-      max-height: 180px;
+      height: 200px;
       object-fit: contain;
-      border-radius: 4px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      background-color: #e0efff;
+      border: 2px solid #60a5fa;
+      transition: transform 0.3s ease;
     }
-
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #2563eb;
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 15px;
+    }
     .product-card h3 {
+      color: #1e40af;
+      font-weight: 700;
       font-size: 18px;
-      margin: 10px 0;
+      margin: 15px 0 10px;
+      flex-shrink: 0;
     }
-
-    .product-card p {
+    .rating {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0;
+      color: #60a5fa;
+      flex-shrink: 0;
+    }
+    .stars {
+      font-size: 16px;
+    }
+    .description {
       font-size: 14px;
-      color: #333;
+      color: #334155;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      flex-grow: 1;
     }
-
-    .product-card .price {
-      font-weight: bold;
-      color: #008000;
-      margin: 10px 0;
+    .description.short {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer;
     }
-
-    .product-card a {
-      display: inline-block;
-      margin-top: 10px;
-      background-color: #1b3b27;
+    .expand-text {
+      color: #2563eb;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 22px;
+      color: #059669;
+      margin: 15px 0;
+      flex-shrink: 0;
+    }
+    .shop-btn {
+      margin-top: auto;
+      background: linear-gradient(135deg,#2563eb,#3b82f6);
       color: white;
-      padding: 8px 16px;
+      padding: 14px 28px;
+      font-weight: 700;
+      border-radius: 28px;
+      font-size: 16px;
       text-decoration: none;
-      border-radius: 4px;
+      box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+      transition: all 0.3s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
     }
-
-    .loading,
+    .shop-btn:hover {
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 9px 24px rgba(37,99,235,0.4);
+    }
+    .shop-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 120%;
+      height: 100%;
+      background: linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+      transition: left 0.5s ease;
+      border-radius: 28px;
+      pointer-events: none;
+    }
+    .shop-btn:hover::before {
+      left: 100%;
+    }
     .no-products {
       text-align: center;
-      padding: 50px;
-      font-size: 16px;
-      color: #555;
+      padding: 50px 20px;
+      font-size: 18px;
+      color: #64748b;
     }
   </style>
-  <link rel="icon" href="data:,"> <!-- Fix favicon error -->
 </head>
 <body>
-
   <div class="header">
-    <h1>💻🌐 Computer & Internet ⚡🔒</h1>
-    <p>Essential digital solutions and online products for modern life</p>
+    <h1>💻 Computer & Internet 🛠️</h1>
+    <p>Top trending computer & internet digital products and online solutions</p>
     <a href="index.html">← Back to Home</a>
   </div>
-
-  <div id="loading" class="loading">Loading...</div>
-  <div id="product-container" class="product-grid" style="display:none;"></div>
-  <div id="no-products" class="no-products" style="display:none;">No products found in Computer & Internet category.</div>
-
+  <div id="product-container" class="product-grid"></div>
+  <div id="no-products" class="no-products" style="display:none;">
+    No products found in Computer & Internet category.
+  </div>
   <script>
-    const SHEET_URL = "https://script.google.com/macros/s/AKfycbwE9NmFhq-jQg7XtWXDOk46HG1JkjZsJrmpgpOBwkqnilI87TebvzluT2Q35_bggKs/exec";
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbz587ETLZV3qym3Rw3J6sNRMK2alqL9BQS9GR6icixeLr8EbLPop1h5OQLOJ1lePduO/exec";
 
-    // Fetch products for this category
-    fetch(`${SHEET_URL}?category=Computer%20%26%20Internet`)
-      .then(response => response.json())
+    function truncate(text, max = 120) {
+      return text.length <= max ? text : text.substr(0, max) + '...';
+    }
+    function badge() {
+      const b = ['💻 Trusted','⚙️ Powerful','🔥 Bestseller','🚀 New','✨ Popular'];
+      return b[Math.floor(Math.random() * b.length)];
+    }
+    function rating() {
+      const r = ['4.5','4.7','4.8','4.9','5.0'];
+      return r[Math.floor(Math.random() * r.length)];
+    }
+    function formatPrice(price) {
+      if (!price) return "$0.00";
+      let clean = price.toString().replace(/[^0-9.]/g, '');
+      let num = parseFloat(clean);
+      if (isNaN(num)) return "$0.00";
+      return "$" + num.toLocaleString('en-US', {
+        minimumFractionDigits: num % 1 === 0 ? 0 : 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    fetch(SHEET_URL)
+      .then(r => r.json())
       .then(data => {
-        const loading = document.getElementById("loading");
         const container = document.getElementById("product-container");
         const noProducts = document.getElementById("no-products");
-
-        loading.style.display = "none"; // Hide loading message
-
-        if (!data || data.length === 0) {
+        const products = data.filter(item => item.Category && item.Category.trim() === "Computer & Internet");
+        if (!products.length) {
           noProducts.style.display = "block";
-        } else {
-          container.style.display = "flex";
-          data.forEach(product => {
-            const card = document.createElement("div");
-            card.className = "product-card";
-            card.innerHTML = `
-              <img src="${product["Image URL"]}" alt="${product["Product Name"]}">
-              <h3>${product["Product Name"]}</h3>
-              <p>${product.Description}</p>
-              <div class="price">$${product.Price}</div>
-              <a href="${product["Product Link "]}" target="_blank">View Product</a>
-            `;
-            container.appendChild(card);
-          });
+          return;
         }
+        products.forEach((p, i) => {
+          const link = p["Product Link "] || p["Product Link"] || p["Product URL"];
+          if (!link) return;
+          const full = p.Description || "";
+          const short = truncate(full, 150);
+          const imgUrl = p["Thumbnail URL"] || p["Image URL"] || "";
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.innerHTML = `
+            <img src="${imgUrl}" alt="${p["Product Name"]}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;320&quot; height=&quot;200&quot;%3E%3Crect width=&quot;100%25&quot; height=&quot;100%25&quot; fill=&quot;%23bfdbfe&quot;/%3E%3Ctext x=&quot;50%25&quot; y=&quot;50%25&quot; text-anchor=&quot;middle&quot; fill=&quot;%232563eb&quot; font-size=&quot;16&quot;%3EImage Coming Soon%3C/text%3E%3C/svg%3E'" />
+            <div class="badge">${badge()}</div>
+            <h3>${p["Product Name"]}</h3>
+            <div class="rating"><span class="stars">⭐⭐⭐⭐⭐</span><span>${rating()}/5</span></div>
+            <div class="description short" id="desc-${i}">
+              ${short}${full.length > 150 ? '<div class="expand-text">• • • hover to read more</div>' : ''}
+            </div>
+            <div class="price">${formatPrice(p.Price)}</div>
+            <a href="${link}" target="_blank" rel="noopener" class="shop-btn">Shop Now 💻</a>
+          `;
+          if (full.length > 150) {
+            const descEl = card.querySelector(`#desc-${i}`);
+            descEl.addEventListener('mouseenter', () => {
+              descEl.innerHTML = full + '<div class="expand-text">hover away to collapse</div>';
+              descEl.className = "description expanded";
+            });
+            descEl.addEventListener('mouseleave', () => {
+              descEl.innerHTML = short + '<div class="expand-text">• • • hover to read more</div>';
+              descEl.className = "description short";
+            });
+          }
+          container.appendChild(card);
+        });
       })
-      .catch(error => {
-        console.error("Error loading products:", error);
-        document.getElementById("loading").innerText = "Failed to load products. Please try again later.";
+      .catch(err => {
+        console.error(err);
+        document.getElementById("no-products").style.display = "block";
       });
   </script>
 </body>
 </html>
+<script async="async" data-cfasync="false" src="//pl27461502.profitableratecpm.com/eec35304b2808cb4fd3ccba8669c7be9/invoke.js"></script>
+<div id="container-eec35304b2808cb4fd3ccba8669c7be9"></div>
